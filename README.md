@@ -1,1 +1,2 @@
-# quickstart-ios
+# Sample iOS App using HyperTrack SDK
+
