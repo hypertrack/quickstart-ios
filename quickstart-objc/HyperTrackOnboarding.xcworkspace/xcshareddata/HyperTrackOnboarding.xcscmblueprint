@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8B905B806932448335D88BE319080CF86506B38C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8B905B806932448335D88BE319080CF86506B38C" : 9223372036854775807,
+    "1CF0824BD8930625EEC54D96117178518CCDF5CC" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "460BA0A4-27FA-4936-A1C0-004F344BCE98",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8B905B806932448335D88BE319080CF86506B38C" : "ios-sdk-onboarding-objc\/",
+    "1CF0824BD8930625EEC54D96117178518CCDF5CC" : "..\/hypertrack-ios-v3"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HyperTrackOnboarding",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HyperTrackOnboarding.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hypertrack\/hypertrack-ios-v3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1CF0824BD8930625EEC54D96117178518CCDF5CC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hypertrack\/ios-sdk-onboarding-objc.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8B905B806932448335D88BE319080CF86506B38C"
+    }
+  ]
+}
