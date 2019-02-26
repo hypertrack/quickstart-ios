@@ -1,7 +1,0 @@
-
-target 'HyperTrackOnboarding' do
-
-  use_frameworks!
-  pod 'HyperTrack'
-
-end
