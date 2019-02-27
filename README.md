@@ -6,7 +6,7 @@
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes.
 
 First, you need Publishable Key so that we can identify your devices. You can get it [here]().
-Then you can [start with this Quickstart app](#starting-with-quickstart-app), that is ready to go or you can [integrate the SDK](#integrating-the-SDK-in-your-app) in your app.
+Then you can [start with this Quickstart app](#starting-with-quickstart-app) that is ready to go or you can [integrate the SDK](#integrating-the-SDK-in-your-app) in your app.
 
 ## Starting with Quickstart app
 
@@ -25,11 +25,11 @@ Run `pod install` inside the cloned directory. After CocoaPods creates the `Quic
 
 ### Set your Publishable Key
 
-Inside the workspace, you open the Quickstart project. Set you Publishable Key inside the placeholder in `AppDelegate.swift` file.
+Open the Quickstart project inside the workspace. Set your Publishable Key inside the placeholder in `AppDelegate.swift` file.
 
 ### You are all set
 
-Run the app on your phone, and you should see the following control interface.
+Run the app on your phone, and you should see the following control interface:
 
 <img src="Images/Control_Screen.png" alt="Control Screen" width="320"/>
 
@@ -41,11 +41,11 @@ After enabling location and activity permissions (choose "Always Allow" if you w
 
 ### Requirements
 
-The HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C. 
+HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C. 
 
 ### Step by step instructions
 
-#### Add the HyperTrackCore SDK to your Podfile
+#### Add HyperTrackCore SDK to your Podfile
 
 ```ruby
 platform :ios, '9.0'
@@ -100,7 +100,7 @@ HyperTrackCore.requestActivityPermission { (error) in
 
 #### Initialize the SDK
 
-Put initialization code inside your AppDelegate's `application:didFinishLaunchingWithOptions:` method 
+Put the initialization code inside your AppDelegate's `application:didFinishLaunchingWithOptions:` method 
 
 ```swift
 HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
@@ -118,4 +118,4 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
 
 #### You are all set
 
-After you run the app and accept permission SDK starts collecting the data.
+You can run the app and start using HyperTrack.
