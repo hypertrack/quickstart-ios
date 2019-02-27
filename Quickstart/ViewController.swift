@@ -3,16 +3,18 @@ import HyperTrackCore
 
 class ViewController: UIViewController {
     
-    @IBOutlet var deviceID: UILabel!
+    @IBOutlet var deviceID: SRCopyableLabel!
     @IBOutlet var locationPermissionButton: UIButton!
     @IBOutlet var activityPermissionButton: UIButton!
     @IBOutlet var trackingButton: UIButton!
-    
+
     var trackingEnabled = false {
         didSet {
             updateTrackingButtonTitle()
         }
     }
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,8 @@ class ViewController: UIViewController {
         
         deviceID.text = HyperTrackCore.getDeviceId()
     }
+    
+    // MARK: Button actions
     
     @IBAction func locationPermissionButtonClicked() {
         locationPermissionButton.isUserInteractionEnabled = false
@@ -32,7 +36,6 @@ class ViewController: UIViewController {
         HyperTrackCore.requestActivityPermission(completionHandler: nil)
     }
     
-    
     @IBAction func resumeTrackingButtonClicked() {
         if trackingEnabled {
             trackingEnabled = false
@@ -43,11 +46,14 @@ class ViewController: UIViewController {
         updateTrackingButtonTitle()
     }
     
+    // MARK: Utitliy
+    
     func updateTrackingButtonTitle() {
         trackingButton.setTitle(trackingEnabled ? "Pause Tracking" : "Resume Tracking", for: .normal)
     }
 }
 
+// MARK: Update button states based on service status
 
 extension ViewController: ServiceStatusUpdateDelegate {
     

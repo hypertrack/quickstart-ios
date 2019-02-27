@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ypq-jy-2DZ">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,26 +23,26 @@
             <objects>
                 <viewController id="ypq-jy-2DZ" customClass="ViewController" customModule="Quickstart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NOF-8v-5Tq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device ID (long press to copy)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uu5-w7-nex">
-                                <rect key="frame" x="67" y="64" width="241" height="21"/>
+                                <rect key="frame" x="28" y="64" width="264.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEVICEID-ISAU-UIDS-TRIN-GRFC4122VER4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-2Z-ZYa">
-                                <rect key="frame" x="0.0" y="93" width="375" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEVICEID-ISAU-UIDS-TRIN-GRFC4122VER4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-2Z-ZYa" customClass="SRCopyableLabel" customModule="Quickstart" customModuleProvider="target">
+                                <rect key="frame" x="30" y="93.5" width="260" height="42.5"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="zju-78-LEA">
-                                <rect key="frame" x="30" y="283.5" width="315" height="120"/>
+                                <rect key="frame" x="30" y="234" width="260" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-kh-wyg">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="15"/>
                                         <state key="normal" title="Request Location Permission">
@@ -58,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmc-cC-Rxx">
-                                        <rect key="frame" x="0.0" y="75" width="315" height="45"/>
+                                        <rect key="frame" x="0.0" y="75" width="260" height="45"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="15"/>
                                         <state key="normal" title="Request Activity Permission">
@@ -79,7 +79,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s26-pf-JiT">
-                                <rect key="frame" x="30" y="578" width="315" height="45"/>
+                                <rect key="frame" x="30" y="479" width="260" height="45"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="1mK-xS-LFc"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="Szc-2Z-ZYa" firstAttribute="top" secondItem="uu5-w7-nex" secondAttribute="bottom" constant="8" id="ccR-U5-opF"/>
                             <constraint firstItem="Szc-2Z-ZYa" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="hSe-pK-3KV"/>
                             <constraint firstItem="s26-pf-JiT" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="iNm-K0-paA"/>
-                            <constraint firstItem="Szc-2Z-ZYa" firstAttribute="width" secondItem="eAQ-X4-F0O" secondAttribute="width" id="xfH-FU-Otw"/>
+                            <constraint firstItem="Szc-2Z-ZYa" firstAttribute="width" secondItem="eAQ-X4-F0O" secondAttribute="width" constant="-60" id="xfH-FU-Otw"/>
                             <constraint firstItem="zju-78-LEA" firstAttribute="centerY" secondItem="eAQ-X4-F0O" secondAttribute="centerY" id="y9z-w3-MzX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eAQ-X4-F0O"/>

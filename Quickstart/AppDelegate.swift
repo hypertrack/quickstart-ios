@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    /// To initialize the SDK you need to set your own Publishable Key
     func initializeHyperTrackSDK() {
         HyperTrackCore.initialize(publishableKey: "pk_06f18a899893ad7588a9294fe2ead708946c16c0") { (error) in
             
