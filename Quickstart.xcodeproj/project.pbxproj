@@ -12,6 +12,10 @@
 		3192EFF22225C393003D6B4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFF12225C393003D6B4B /* Assets.xcassets */; };
 		3192EFF52225C393003D6B4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */; };
 		3192EFFD2226A91C003D6B4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFFC2226A91C003D6B4B /* ViewController.swift */; };
+		3192F0022226BED2003D6B4B /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFFE2226BED1003D6B4B /* WorkSans-Regular.ttf */; };
+		3192F0032226BED2003D6B4B /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFFF2226BED1003D6B4B /* WorkSans-Medium.ttf */; };
+		3192F0042226BED2003D6B4B /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192F0002226BED2003D6B4B /* WorkSans-Bold.ttf */; };
+		3192F0052226BED2003D6B4B /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192F0012226BED2003D6B4B /* WorkSans-SemiBold.ttf */; };
 		BBCEC0206B695ABFE5516A16 /* Pods_Quickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +27,10 @@
 		3192EFF42225C393003D6B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3192EFF62225C393003D6B4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3192EFFC2226A91C003D6B4B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3192EFFE2226BED1003D6B4B /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
+		3192EFFF2226BED1003D6B4B /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
+		3192F0002226BED2003D6B4B /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
+		3192F0012226BED2003D6B4B /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.release.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.release.xcconfig"; sourceTree = "<group>"; };
 		7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.debug.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,10 +81,22 @@
 				3192EFFC2226A91C003D6B4B /* ViewController.swift */,
 				3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */,
 				3192EFEE2225C38D003D6B4B /* Main.storyboard */,
+				3192F0062226BEE1003D6B4B /* Resources */,
 				3192EFF12225C393003D6B4B /* Assets.xcassets */,
 				3192EFF62225C393003D6B4B /* Info.plist */,
 			);
 			path = Quickstart;
+			sourceTree = "<group>";
+		};
+		3192F0062226BEE1003D6B4B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3192F0002226BED2003D6B4B /* WorkSans-Bold.ttf */,
+				3192EFFF2226BED1003D6B4B /* WorkSans-Medium.ttf */,
+				3192EFFE2226BED1003D6B4B /* WorkSans-Regular.ttf */,
+				3192F0012226BED2003D6B4B /* WorkSans-SemiBold.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BA8594D92621E14E8DCCD68D /* Pods */ = {
@@ -155,7 +175,11 @@
 			files = (
 				3192EFF52225C393003D6B4B /* LaunchScreen.storyboard in Resources */,
 				3192EFF22225C393003D6B4B /* Assets.xcassets in Resources */,
+				3192F0052226BED2003D6B4B /* WorkSans-SemiBold.ttf in Resources */,
 				3192EFF02225C38D003D6B4B /* Main.storyboard in Resources */,
+				3192F0032226BED2003D6B4B /* WorkSans-Medium.ttf in Resources */,
+				3192F0022226BED2003D6B4B /* WorkSans-Regular.ttf in Resources */,
+				3192F0042226BED2003D6B4B /* WorkSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
