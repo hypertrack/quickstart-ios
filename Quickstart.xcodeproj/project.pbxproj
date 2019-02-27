@@ -8,23 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		3192EFE92225C38D003D6B4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFE82225C38D003D6B4B /* AppDelegate.swift */; };
-		3192EFEB2225C38D003D6B4B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFEA2225C38D003D6B4B /* FirstViewController.swift */; };
-		3192EFED2225C38D003D6B4B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFEC2225C38D003D6B4B /* SecondViewController.swift */; };
 		3192EFF02225C38D003D6B4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFEE2225C38D003D6B4B /* Main.storyboard */; };
 		3192EFF22225C393003D6B4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFF12225C393003D6B4B /* Assets.xcassets */; };
 		3192EFF52225C393003D6B4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */; };
+		3192EFFD2226A91C003D6B4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFFC2226A91C003D6B4B /* ViewController.swift */; };
 		BBCEC0206B695ABFE5516A16 /* Pods_Quickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3192EFE52225C38D003D6B4B /* Quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3192EFE82225C38D003D6B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3192EFEA2225C38D003D6B4B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		3192EFEC2225C38D003D6B4B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3192EFEF2225C38D003D6B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3192EFF12225C393003D6B4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3192EFF42225C393003D6B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3192EFF62225C393003D6B4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3192EFFC2226A91C003D6B4B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.release.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.release.xcconfig"; sourceTree = "<group>"; };
 		7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.debug.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,11 +70,10 @@
 			isa = PBXGroup;
 			children = (
 				3192EFE82225C38D003D6B4B /* AppDelegate.swift */,
-				3192EFEA2225C38D003D6B4B /* FirstViewController.swift */,
-				3192EFEC2225C38D003D6B4B /* SecondViewController.swift */,
+				3192EFFC2226A91C003D6B4B /* ViewController.swift */,
+				3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */,
 				3192EFEE2225C38D003D6B4B /* Main.storyboard */,
 				3192EFF12225C393003D6B4B /* Assets.xcassets */,
-				3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */,
 				3192EFF62225C393003D6B4B /* Info.plist */,
 			);
 			path = Quickstart;
@@ -88,7 +85,6 @@
 				88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */,
 				3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -221,9 +217,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3192EFED2225C38D003D6B4B /* SecondViewController.swift in Sources */,
 				3192EFE92225C38D003D6B4B /* AppDelegate.swift in Sources */,
-				3192EFEB2225C38D003D6B4B /* FirstViewController.swift in Sources */,
+				3192EFFD2226A91C003D6B4B /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
