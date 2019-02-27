@@ -7,10 +7,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         HyperTrackCore.requestLocationPermission { (error) in
-            print(error?.errorMessage ?? "error requesting location permissions")
+            print(error?.errorMessage ?? "location permissions granted")
         }
         HyperTrackCore.requestActivityPermission { (error) in
-            print(error?.errorMessage ?? "error requestiong motion permissions")
+            print(error?.errorMessage ?? "motion permissions granted")
         }
     }
 }
