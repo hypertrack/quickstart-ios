@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="NQv-H1-nYE">
             <objects>
-                <viewController id="ypq-jy-2DZ" sceneMemberID="viewController">
+                <viewController id="ypq-jy-2DZ" customClass="ViewController" customModule="Quickstart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NOF-8v-5Tq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
