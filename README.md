@@ -1,5 +1,8 @@
 # HyperTrack SDK Quickstart for iOS
 
+![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
+![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrackCore.svg)
+
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes.
 
 First, you need Publishable Key so that we can identify your devices. You can get it [here]().
@@ -28,11 +31,11 @@ Inside the workspace, you open the Quickstart project. Set you Publishable Key i
 
 Run the app on your phone, and you should see the following control interface.
 
-[Image]
+<img src="Images/Control_Screen.png" alt="Control Screen" width="320"/>
 
 After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location data.
 
-[Image]
+<img src="Images/Control_Screen_Running.png" alt="Control Screen Running" width="320"/>
 
 ## Integrating the SDK in your app
 
@@ -64,6 +67,8 @@ end
 #### Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates."
+
+![Capabilities](Images/Background_Modes.png)
 
 Open the Info tab and set the privacy permission strings. They show up in permission alerts for the user. You need to add:
 - NSLocationAlwaysAndWhenInUseUsageDescription
