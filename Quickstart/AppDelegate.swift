@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// To initialize the SDK you need to set your own Publishable Key
     func initializeHyperTrackSDK() {
-        HyperTrackCore.initialize(publishableKey: "pk_06f18a899893ad7588a9294fe2ead708946c16c0") { (error) in
+        HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
             
             if let message = error?.errorMessage {
                 DispatchQueue.main.async { [weak self] in
