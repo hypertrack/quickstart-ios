@@ -21,13 +21,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device’s location</string>
+	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device’s location</string>
+	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device’s location</string>
+	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
 	<key>NSMotionUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device’s location</string>
+	<string>&lt;YOUR APP&gt; needs to access this device's motion updates for &lt;REASON&gt;</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>WorkSans-Bold.ttf</string>

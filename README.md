@@ -10,12 +10,12 @@ Then you can [start with this Quickstart app](#starting-with-quickstart-app) tha
 
 ## Starting with Quickstart app
 
-### Clone this repo
+### Step 1: Clone this repo
 ```bash
 git clone https://github.com/hypertrack/quickstart-ios.git
 cd quickstart-ios
 ```
-### Install the SDK dependency
+### Step 2: Install the SDK dependency
 
 Quickstart app uses CocoaPods dependency manager to install the latest version of the SDK.
 
@@ -23,7 +23,7 @@ If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/usi
 
 Run `pod install` inside the cloned directory. After CocoaPods creates the `Quickstart.xcworkspace` workspace file, open it with Xcode.
 
-### Set your Publishable Key
+### Step 3: Set your Publishable Key
 
 Open the Quickstart project inside the workspace. Set your Publishable Key inside the placeholder in `AppDelegate.swift` file.
 
@@ -31,11 +31,15 @@ Open the Quickstart project inside the workspace. Set your Publishable Key insid
 
 Run the app on your phone, and you should see the following control interface:
 
-<img src="Images/Control_Screen.png" alt="Control Screen" width="320"/>
+<p align="center">
+  <img src="Images/Control_Screen.png" alt="Control Screen" width="320"/>
+</p>
 
 After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location data.
 
-<img src="Images/Control_Screen_Running.png" alt="Control Screen Running" width="320"/>
+<p align="center">
+  <img src="Images/Control_Screen_Running.png" alt="Control Screen Running" width="320"/>
+</p>
 
 ## Integrating the SDK in your app
 
@@ -45,7 +49,11 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
-#### Add HyperTrackCore SDK to your Podfile
+#### Step 1: Add HyperTrackCore SDK to your Podfile
+
+We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
+
+Using commandline run `pod init` in your project directory to create a Podfile. Put `pod 'HyperTrackCore'` in the the Podfile:
 
 ```ruby
 platform :ios, '9.0'
@@ -53,30 +61,35 @@ inhibit_all_warnings!
 
 target '<#Your app name#>' do
   use_frameworks!
-  pod 'HyperTrackCore', :git => 'https://github.com/hypertrack/core-ios-sdk.git', :commit => 'c7554a7e9664b4c0c58de0c635ade83683bb0b3b'
-end
-
-# This pre-install script is needed to set the SDK dependencies to use Swift 4.0
-pre_install do |installer|
-  installer.analysis_result.specifications.each do |s|
-    s.swift_version = '4.0' unless s.swift_version
-  end
+  pod 'HyperTrackCore'
 end
 ```
 
-#### Enable background location updates
+Run `pod install`. CocoaPods will build the dependencies and create a workspace (`.xcworkspace`) for you.
+
+#### Step 2: Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates."
 
-![Capabilities](Images/Background_Modes.png)
+![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-Open the Info tab and set the privacy permission strings. They show up in permission alerts for the user. You need to add:
-- NSLocationAlwaysAndWhenInUseUsageDescription
-- NSLocationWhenInUseUsageDescription
-- NSMotionUsageDescription
-- NSLocationAlwaysUsageDescription (if you are targeting versions before iOS 11)
+#### Step 3: Add authorization description keys
 
-In your app, use our convenience functions to ask for the location and activity permissions.
+If you want to know the users' location at all times, set the following description keys with the corresponding text in the Info.plist file:
+
+![Always authorization location](Images/Always_Authorization.png)
+
+Include "Privacy - Location Always Usage Description" key only when you need iOS 10 compatibility.
+
+You can ask for "When In Use" location access only, but be advised, the user will see a constant blue bar at the top while your app is running.
+
+![In use authorization location](Images/In_Use_Authorization.png)
+
+#### Step 4: Ask the user for permissions
+
+In your app, use our convenience functions to ask for the location and activity permissions. HyperTrack SDK needs both to generate enriched location data.
+
+##### Swift
 
 ```swift
 HyperTrackCore.requestLocationPermission { (error) in
@@ -88,6 +101,8 @@ HyperTrackCore.requestActivityPermission { (error) in
 }
 ```
 
+##### Objective-C
+
 ```objc
 [HTCore requestLocationPermissionWithCompletionHandler:^(HTCoreError * _Nullable error) {
     /// handle errors if any
@@ -98,9 +113,11 @@ HyperTrackCore.requestActivityPermission { (error) in
 }];
 ```
 
-#### Initialize the SDK
+#### Step 5: Initialize the SDK
 
 Put the initialization code inside your AppDelegate's `application:didFinishLaunchingWithOptions:` method 
+
+##### Swift
 
 ```swift
 HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
@@ -108,6 +125,8 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
     /// handle errors if any
 }
 ```
+
+##### Objective-C
 
 ```objc
 [HTCore initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTCoreError * _Nullable error) {
