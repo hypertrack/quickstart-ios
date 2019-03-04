@@ -3,5 +3,5 @@ inhibit_all_warnings!
 
 target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrackCore', :git => 'https://github.com/hypertrack/core-ios-sdk.git', :commit => '4a129f11c54f2d3228de774cac5dd41c4b822290'
+  pod 'HyperTrackCore', :git => 'https://github.com/hypertrack/core-ios-sdk.git', :commit => '93b876c08d0dc01f7ce37ae382264430f5b9dfd3'
 end

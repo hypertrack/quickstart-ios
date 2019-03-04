@@ -8,7 +8,7 @@ PODS:
     - GRDB.swift (= 3.6.2)
 
 DEPENDENCIES:
-  - HyperTrackCore (from `https://github.com/hypertrack/core-ios-sdk.git`, commit `4a129f11c54f2d3228de774cac5dd41c4b822290`)
+  - HyperTrackCore (from `https://github.com/hypertrack/core-ios-sdk.git`, commit `93b876c08d0dc01f7ce37ae382264430f5b9dfd3`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,12 +17,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   HyperTrackCore:
-    :commit: 4a129f11c54f2d3228de774cac5dd41c4b822290
+    :commit: 93b876c08d0dc01f7ce37ae382264430f5b9dfd3
     :git: https://github.com/hypertrack/core-ios-sdk.git
 
 CHECKOUT OPTIONS:
   HyperTrackCore:
-    :commit: 4a129f11c54f2d3228de774cac5dd41c4b822290
+    :commit: 93b876c08d0dc01f7ce37ae382264430f5b9dfd3
     :git: https://github.com/hypertrack/core-ios-sdk.git
 
 SPEC CHECKSUMS:
@@ -30,6 +30,6 @@ SPEC CHECKSUMS:
   GRDB.swift: e10787d857b6b8135354b9e08fb23b4bb8e2fab7
   HyperTrackCore: 288082f3fb085136dea1cef7c14e76eccfe1bfef
 
-PODFILE CHECKSUM: 8db6a6a86b2ae8fa1805efe67ba47bcf19cb99ea
+PODFILE CHECKSUM: 5e035e867d0f550987f7594efe727354673b435c
 
 COCOAPODS: 1.6.1
