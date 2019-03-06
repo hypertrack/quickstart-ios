@@ -1,4 +1,4 @@
-# HyperTrack SDK Quickstart for iOS
+# HyperTrack Quickstart for iOS SDK
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
