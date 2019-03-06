@@ -19,9 +19,9 @@ We use Publishable Key to identify your devices. To get one:
 
 ![Signup flow](Images/Signup_flow.png)
 
-Next, you can [start with the Quickstart app](#quickstart), or can [integrate the SDK](#install-the-sdk) in your app.
+Next, you can [start with the Quickstart app](#quickstart-app), or can [integrate the SDK](#install-the-sdk) in your app.
 
-## Quickstart
+## Quickstart app
 
 1. [Clone this repo](#step-1-clone-this-repo)
 2. [Install the SDK dependency](#step-2-install-the-sdk-dependency)
