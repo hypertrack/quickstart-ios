@@ -5,10 +5,31 @@
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes.
 
-First, you need Publishable Key so that we can identify your devices. You can get it [here]().
-Then you can [start with the Quickstart app](#starting-with-quickstart-app) that is ready to go or you can [integrate the SDK](#integrating-the-SDK-in-your-app) in your app.
+* [Publishable Key](#publishable-key) - How to get your Publishable Key
+* [Quickstart](#quickstart) - Start with a ready-to-go app
+* [Install the SDK](#install-the-sdk) - Integrate the SDK into your app
+* [Dashboard](#dashboard) - See all your devices' locations in Dashboard
 
-## Starting with Quickstart app
+## Publishable Key
+
+We use Publishable Key to identify your devices.
+
+To get one:
+
+1. Go to the [Signup page](https://v3.dashboard.hypertrack.com/signup). Enter your email address and password.
+2. Open the verification link sent to your inbox.
+3. Open the [Keys page](https://v3.dashboard.hypertrack.com/account/keys), where you can copy your Publishable Key.
+
+![Signup flow](Images/Signup_flow.png)
+
+Next, you can [start with the Quickstart app](#quickstart) that is ready to go or you can [integrate the SDK](#install-the-sdk) in your app.
+
+## Quickstart
+
+1. [Clone this repo](#step-1:-clone-this-repo)
+2. [Install the SDK dependency](#step-2:-install-the-sdk-dependency)
+3. [Set your Publishable Key](#step-3:-set-your-publishable-key)
+4. [Run the Quickstart app](#step-4:-run-the-quickstart-app)
 
 ### Step 1: Clone this repo
 ```bash
@@ -17,7 +38,7 @@ cd quickstart-ios
 ```
 ### Step 2: Install the SDK dependency
 
-Quickstart app uses CocoaPods dependency manager to install the latest version of the SDK.
+Quickstart app uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version is advised.
 
 If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -25,9 +46,9 @@ Run `pod install` inside the cloned directory. After CocoaPods creates the `Quic
 
 ### Step 3: Set your Publishable Key
 
-Open the Quickstart project inside the workspace and set your Publishable Key inside the placeholder in `AppDelegate.swift` file.
+Open the Quickstart project inside the workspace and set your [Publishable Key](#publishable-key) inside the placeholder in the `AppDelegate.swift` file.
 
-### You are all set
+### Step 4: Run the Quickstart app
 
 Run the app on your phone, and you should see the following control interface:
 
@@ -35,7 +56,9 @@ Run the app on your phone, and you should see the following control interface:
 
 After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location data. You can pause or resume the tracking with the button below.
 
-## Integrating the SDK in your app
+[Check out the Dashboard](#dashboard) to see your device live on the map.
+
+## Install the SDK
 
 ### Requirements
 
@@ -47,15 +70,15 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
-Using command line run `pod init` in your project directory to create a Podfile. Put `pod 'HyperTrackCore'` in the the Podfile:
+Using command line run `pod init` in your project directory to create a Podfile. Put `pod 'HyperTrack'` in the Podfile:
 
 ```ruby
 platform :ios, '9.0'
 inhibit_all_warnings!
 
-target '<#Your app name#>' do
+target '<Your app name>' do
   use_frameworks!
-  pod 'HyperTrackCore'
+  pod 'HyperTrack'
 end
 ```
 
@@ -131,4 +154,10 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
 
 #### You are all set
 
-You can run the app and start using HyperTrack.
+You can run the app and start using HyperTrack. You can see your devices in the [Dashboard](#dashboard).
+
+## Dashboard
+
+Once your app is running go to the [Dashboard page](https://v3.dashboard.hypertrack.com/devices) where you can see a list of all your devices and their location on the map.
+
+![Dashboard](Images/Dashboard.png)
