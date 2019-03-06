@@ -1,7 +1,7 @@
 # HyperTrack SDK Quickstart for iOS
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
-![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrackCore.svg)
+![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes.
 
@@ -26,10 +26,10 @@ Next, you can [start with the Quickstart app](#quickstart) that is ready to go o
 
 ## Quickstart
 
-1. [Clone this repo](#step-1:-clone-this-repo)
-2. [Install the SDK dependency](#step-2:-install-the-sdk-dependency)
-3. [Set your Publishable Key](#step-3:-set-your-publishable-key)
-4. [Run the Quickstart app](#step-4:-run-the-quickstart-app)
+1. [Clone this repo](#step-1-clone-this-repo)
+2. [Install the SDK dependency](#step-2-install-the-sdk-dependency)
+3. [Set your Publishable Key](#step-3-set-your-publishable-key)
+4. [Run the Quickstart app](#step-4-run-the-quickstart-app)
 
 ### Step 1: Clone this repo
 ```bash
@@ -66,7 +66,13 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
-#### Step 1: Add HyperTrackCore SDK to your Podfile
+1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
+2. [Enable background location updates](#step-2-enable-background-location-updates)
+3. [Add authorization description keys](#step-3-add-authorization-description-keys)
+4. [Ask the user for permissions](#step-4-ask-the-user-for-permissions)
+5. [Initialize the SDK](#step-5-initialize-the-sdk)
+
+#### Step 1: Add HyperTrack SDK to your Podfile
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
