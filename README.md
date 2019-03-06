@@ -157,7 +157,7 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
 
 #### You are all set
 
-You can run the app and start using HyperTrack. You can see your devices on the [Dashboard](#dashboard).
+You can run the app and start using HyperTrack. You can see your devices on the [dashboard](#dashboard).
 
 ## Dashboard
 
