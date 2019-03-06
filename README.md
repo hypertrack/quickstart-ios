@@ -3,26 +3,23 @@
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
 
-[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes.
+[HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. This repo contains an example client app that has everything you need to get started in minutes. 
 
-* [Publishable Key](#publishable-key) - How to get your Publishable Key
+* [Publishable Key](#publishable-key) - Get your Publishable Key
 * [Quickstart](#quickstart) - Start with a ready-to-go app
-* [Install the SDK](#install-the-sdk) - Integrate the SDK into your app
-* [Dashboard](#dashboard) - See all your devices' locations in Dashboard
+* [Integrate the SDK](#integrate-the-sdk) - Integrate the SDK into your app
+* [Dashboard](#dashboard) - See all your devices' locations on HyperTrack Dashboard
 
 ## Publishable Key
 
-We use Publishable Key to identify your devices.
-
-To get one:
-
+We use Publishable Key to identify your devices. To get one:
 1. Go to the [Signup page](https://v3.dashboard.hypertrack.com/signup). Enter your email address and password.
 2. Open the verification link sent to your inbox.
 3. Open the [Keys page](https://v3.dashboard.hypertrack.com/account/keys), where you can copy your Publishable Key.
 
 ![Signup flow](Images/Signup_flow.png)
 
-Next, you can [start with the Quickstart app](#quickstart) that is ready to go or you can [integrate the SDK](#install-the-sdk) in your app.
+Next, you can [start with the Quickstart app](#quickstart), or can [integrate the SDK](#install-the-sdk) in your app.
 
 ## Quickstart
 
@@ -58,7 +55,7 @@ After enabling location and activity permissions (choose "Always Allow" if you w
 
 [Check out the Dashboard](#dashboard) to see your device live on the map.
 
-## Install the SDK
+## Integrate the SDK
 
 ### Requirements
 
@@ -160,7 +157,7 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
 
 #### You are all set
 
-You can run the app and start using HyperTrack. You can see your devices in the [Dashboard](#dashboard).
+You can run the app and start using HyperTrack. You can see your devices on the [Dashboard](#dashboard).
 
 ## Dashboard
 
