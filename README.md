@@ -6,7 +6,7 @@
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example iOS app that has everything you need to get started in minutes.
 
 * [Publishable Key](#publishable-key)–Sign up and get your keys
-* [Quickstart](#quickstart)–Start with a ready-to-go app with reliable background service
+* [Quickstart](#quickstart-app)–Start with a ready-to-go app with reliable background service
 * [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
 * [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
 
