@@ -3,33 +3,24 @@ PODS:
   - CocoaLumberjack/Swift (3.4.2):
     - CocoaLumberjack/Default
   - GRDB.swift (3.6.2)
-  - HyperTrack (0.8.4):
+  - HyperTrack (3.0.0):
     - CocoaLumberjack/Swift (= 3.4.2)
     - GRDB.swift (= 3.6.2)
 
 DEPENDENCIES:
-  - HyperTrack (from `https://github.com/hypertrack/core-ios-sdk.git`, commit `4d9447e0f69027db85da7e73463fda506f44d3e1`)
+  - HyperTrack
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CocoaLumberjack
     - GRDB.swift
-
-EXTERNAL SOURCES:
-  HyperTrack:
-    :commit: 4d9447e0f69027db85da7e73463fda506f44d3e1
-    :git: https://github.com/hypertrack/core-ios-sdk.git
-
-CHECKOUT OPTIONS:
-  HyperTrack:
-    :commit: 4d9447e0f69027db85da7e73463fda506f44d3e1
-    :git: https://github.com/hypertrack/core-ios-sdk.git
+    - HyperTrack
 
 SPEC CHECKSUMS:
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   GRDB.swift: e10787d857b6b8135354b9e08fb23b4bb8e2fab7
-  HyperTrack: 73b3c4717b847b8f60943e14ac4ed4e50945b57a
+  HyperTrack: 60f90b7b7f4317cc121d2d0a3becebb4982b1ebf
 
-PODFILE CHECKSUM: 389bcd9b5a2af0e7bdd276ae61f474558c97c544
+PODFILE CHECKSUM: 574f45b6d39b8cbba02f53a1c847b9e264e83df8
 
 COCOAPODS: 1.6.1
