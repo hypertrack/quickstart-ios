@@ -66,8 +66,8 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
 2. [Enable background location updates](#step-2-enable-background-location-updates)
 3. [Add authorization description keys](#step-3-add-authorization-description-keys)
-4. [Ask the user for permissions](#step-4-ask-the-user-for-permissions)
-5. [Initialize the SDK](#step-5-initialize-the-sdk)
+4. [Initialize the SDK](#step-4-initialize-the-sdk)
+5. [Ask the user for permissions](#step-5-ask-the-user-for-permissions)
 
 #### Step 1: Add HyperTrack SDK to your Podfile
 
@@ -107,7 +107,37 @@ You can ask for "When In Use" permission only, but be advised that the device wi
 
 ![In use authorization location](Images/In_Use_Authorization.png)
 
-#### Step 4: Ask the user for permissions
+#### Step 4: Initialize the SDK
+
+Put the initialization code inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method 
+
+##### Swift
+
+```swift
+HyperTrack.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
+    /// perform post initialization actions
+    /// handle errors if any
+}
+```
+
+##### Objective-C
+
+Import the SDK:
+
+```objc
+@import HyperTrack;
+```
+
+Initialize the SDK:
+
+```objc
+[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTSDKError * _Nullable error) {
+    /// perform post initialization actions
+    /// handle errors if any
+}];
+```
+
+#### Step 5: Ask the user for permissions
 
 In your app, use our convenience functions to ask for the location and activity permissions. HyperTrack SDK needs both to generate accurate and enriched location data.
 
@@ -125,42 +155,12 @@ HyperTrack.requestActivityPermission { (error) in
 
 ##### Objective-C
 
-Import the SDK:
-
-```objc
-@import HyperTrack;
-```
-
-Ask for permissions:
-
 ```objc
 [HTSDK requestLocationPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
     /// handle errors if any
 }];
 
 [HTSDK requestActivityPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
-    /// handle errors if any
-}];
-```
-
-#### Step 5: Initialize the SDK
-
-Put the initialization code inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method 
-
-##### Swift
-
-```swift
-HyperTrack.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
-    /// perform post initialization actions
-    /// handle errors if any
-}
-```
-
-##### Objective-C
-
-```objc
-[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTSDKError * _Nullable error) {
-    /// perform post initialization actions
     /// handle errors if any
 }];
 ```
