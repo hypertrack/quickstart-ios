@@ -87,6 +87,8 @@ end
 
 Run `pod install`. CocoaPods will build the dependencies and create a workspace (`.xcworkspace`) for you.
 
+If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Set the version to `4.2`. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you. Don't forget to set it to `4.2`. Additionally, after running `pod install`, make sure that the same setting is present in `CocoaLumberjack` and `GRDB.swift` target inside the `Pods` project.
+
 #### Step 2: Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates".
@@ -112,23 +114,31 @@ In your app, use our convenience functions to ask for the location and activity 
 ##### Swift
 
 ```swift
-HyperTrackCore.requestLocationPermission { (error) in
+HyperTrack.requestLocationPermission { (error) in
     /// handle errors if any
 }
 
-HyperTrackCore.requestActivityPermission { (error) in
+HyperTrack.requestActivityPermission { (error) in
     /// handle errors if any
 }
 ```
 
 ##### Objective-C
 
+Import the SDK:
+
 ```objc
-[HTCore requestLocationPermissionWithCompletionHandler:^(HTCoreError * _Nullable error) {
+@import HyperTrack;
+```
+
+Ask for permissions:
+
+```objc
+[HTSDK requestLocationPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
     /// handle errors if any
 }];
 
-[HTCore requestActivityPermissionWithCompletionHandler:^(HTCoreError * _Nullable error) {
+[HTSDK requestActivityPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
     /// handle errors if any
 }];
 ```
@@ -140,7 +150,7 @@ Put the initialization code inside your `AppDelegate`'s `application:didFinishLa
 ##### Swift
 
 ```swift
-HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
+HyperTrack.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
     /// perform post initialization actions
     /// handle errors if any
 }
@@ -149,7 +159,7 @@ HyperTrackCore.initialize(publishableKey: "<#Paste your Publishable Key here#>")
 ##### Objective-C
 
 ```objc
-[HTCore initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTCoreError * _Nullable error) {
+[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTSDKError * _Nullable error) {
     /// perform post initialization actions
     /// handle errors if any
 }];

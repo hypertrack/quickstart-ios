@@ -1,5 +1,5 @@
 import UIKit
-import HyperTrackCore
+import HyperTrack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// To initialize the SDK you need to set your own Publishable Key
     func initializeHyperTrackSDK() {
-        HyperTrackCore.initialize(publishableKey: "rDOt3ayP0cJ07Nget0NmcMRdZ_9UxG3aKaX2Zoe9FgT4pGiQoxUZhBzPvGvhosauupH5voeNU8-Er6TwUWlJEA") { (error) in
+        HyperTrack.initialize(publishableKey: "rDOt3ayP0cJ07Nget0NmcMRdZ_9UxG3aKaX2Zoe9FgT4pGiQoxUZhBzPvGvhosauupH5voeNU8-Er6TwUWlJEA") { (error) in
             
             if let message = error?.errorMessage {
                 DispatchQueue.main.async { [weak self] in

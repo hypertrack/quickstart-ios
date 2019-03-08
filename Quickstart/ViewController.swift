@@ -1,5 +1,5 @@
 import UIKit
-import HyperTrackCore
+import HyperTrack
 
 class ViewController: UIViewController {
     
@@ -19,29 +19,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        HyperTrackCore.setServiceStatusUpdatesDelegate(self)
+        HyperTrack.setServiceStatusUpdatesDelegate(self)
         
-        deviceID.text = HyperTrackCore.getDeviceId()
+        deviceID.text = HyperTrack.getDeviceId()
     }
     
     // MARK: Button actions
     
     @IBAction func locationPermissionButtonClicked() {
         locationPermissionButton.isUserInteractionEnabled = false
-        HyperTrackCore.requestLocationPermission(completionHandler: nil)
+        HyperTrack.requestLocationPermission(completionHandler: nil)
     }
     
     @IBAction func activityPermissionButtonClicked() {
         activityPermissionButton.isUserInteractionEnabled = false
-        HyperTrackCore.requestActivityPermission(completionHandler: nil)
+        HyperTrack.requestActivityPermission(completionHandler: nil)
     }
     
     @IBAction func resumeTrackingButtonClicked() {
         if trackingEnabled {
             trackingEnabled = false
-            HyperTrackCore.pauseTracking()
+            HyperTrack.pauseTracking()
         } else {
-            HyperTrackCore.resumeTracking()
+            HyperTrack.resumeTracking()
         }
         updateTrackingButtonTitle()
     }
@@ -61,10 +61,10 @@ extension ViewController: ServiceStatusUpdateDelegate {
         let serviceEnabled = status == .started ? true : false
         switch type {
         case .activity:
-            let title = (serviceEnabled ? "Activity Service Running" : (HyperTrackCore.checkActivityPermission() ? "Activity Service Paused" : "Enable Activity Permission"))
+            let title = (serviceEnabled ? "Activity Service Running" : (HyperTrack.checkActivityPermission() ? "Activity Service Paused" : "Enable Activity Permission"))
             updateServiceButtonState(button: activityPermissionButton, serviceEnabled: serviceEnabled, title: title)
         case .location:
-            let title = (serviceEnabled ? "Location Service Running" : (HyperTrackCore.checkLocationPermission() ? "Location Service Paused" : "Enable Location Permission"))
+            let title = (serviceEnabled ? "Location Service Running" : (HyperTrack.checkLocationPermission() ? "Location Service Paused" : "Enable Location Permission"))
             updateServiceButtonState(button: locationPermissionButton, serviceEnabled: serviceEnabled, title: title)
         default:
             break
@@ -81,6 +81,6 @@ extension ViewController: ServiceStatusUpdateDelegate {
         button.setTitle(title, for: .normal)
         button.isUserInteractionEnabled = !serviceEnabled
         
-        self.trackingEnabled = (enableButton && HyperTrackCore.checkActivityPermission() && HyperTrackCore.checkLocationPermission())
+        self.trackingEnabled = (enableButton && HyperTrack.checkActivityPermission() && HyperTrack.checkLocationPermission())
     }
 }
