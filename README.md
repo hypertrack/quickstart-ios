@@ -65,7 +65,7 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
 2. [Enable background location updates](#step-2-enable-background-location-updates)
-3. [Add authorization description keys](#step-3-add-authorization-description-keys)
+3. [Add purpose strings](#step-3-add-purpose-strings)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Ask the user for permissions](#step-5-ask-the-user-for-permissions)
 
@@ -95,9 +95,9 @@ Enable Background Modes in your project target's Capabilities tab. Choose "Locat
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-#### Step 3: Add authorization description keys
+#### Step 3: Add purpose strings
 
-For best results, set the following description keys with the corresponding text in the `Info.plist` file:
+Set the following purpose strings in the `Info.plist` file:
 
 ![Always authorization location](Images/Always_Authorization.png)
 
@@ -106,6 +106,8 @@ Include `Privacy - Location Always Usage Description` key only when you need iOS
 You can ask for "When In Use" permission only, but be advised that the device will see a blue bar at the top while your app is running.
 
 ![In use authorization location](Images/In_Use_Authorization.png)
+
+Be advised, purpose strings are mandatory, and the app crashes without them.
 
 #### Step 4: Initialize the SDK
 
