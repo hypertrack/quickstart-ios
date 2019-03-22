@@ -68,7 +68,7 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 3. [Add purpose strings](#step-3-add-purpose-strings)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Ask the user for permissions](#step-5-ask-the-user-for-permissions)
-5. [Identify devices](#step-6-optional-identify-devices)
+6. [Identify devices](#step-6-optional-identify-devices)
 
 
 #### Step 1: Add HyperTrack SDK to your Podfile
