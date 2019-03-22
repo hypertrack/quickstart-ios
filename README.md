@@ -176,7 +176,7 @@ Another approach is to tag device with a name that will make it easy to distingu
 ##### Swift
 
 ```swift
-HyperTrack.setDevice(name: "Device name", metaData: [String: Any](), { (error) in 
+HyperTrack.setDevice(name: "Device name", metaData: nil, { (error) in 
   /// handle errors if any
 });
 ```
