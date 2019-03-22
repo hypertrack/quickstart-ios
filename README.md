@@ -59,7 +59,7 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 
 ### Requirements
 
-HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C. 
+HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
@@ -68,6 +68,8 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 3. [Add purpose strings](#step-3-add-purpose-strings)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Ask the user for permissions](#step-5-ask-the-user-for-permissions)
+6. [Identify devices](#step-6-optional-identify-devices)
+
 
 #### Step 1: Add HyperTrack SDK to your Podfile
 
@@ -111,7 +113,7 @@ Be advised, purpose strings are mandatory, and the app crashes without them.
 
 #### Step 4: Initialize the SDK
 
-Put the initialization code inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method 
+Put the initialization code inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method
 
 ##### Swift
 
@@ -163,6 +165,26 @@ HyperTrack.requestActivityPermission { (error) in
 }];
 
 [HTSDK requestActivityPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
+    /// handle errors if any
+}];
+```
+
+#### Step 6. (optional) Identify devices
+All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
+Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
+
+##### Swift
+
+```swift
+HyperTrack.setDevice(name: "Device name", metaData: nil, { (error) in 
+  /// handle errors if any
+});
+```
+
+##### Objective-C
+
+```objc
+[HTSDK setDeviceForName: "Device name" metaData: nil completionHandler:^(HTSDKError * _Nullable error) {
     /// handle errors if any
 }];
 ```
