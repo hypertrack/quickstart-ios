@@ -13,9 +13,9 @@
 ## Publishable Key
 
 We use Publishable Key to identify your devices. To get one:
-1. Go to the [Signup page](https://v3.dashboard.hypertrack.com/signup). Enter your email address and password.
+1. Go to the [Signup page](https://dashboard.hypertrack.com/signup). Enter your email address and password.
 2. Open the verification link sent to your email.
-3. Open the [Keys page](https://v3.dashboard.hypertrack.com/account/keys), where you can copy your Publishable Key.
+3. Open the [Keys page](https://dashboard.hypertrack.com/account/keys), where you can copy your Publishable Key.
 
 ![Signup flow](Images/Signup_flow.png)
 
@@ -195,6 +195,6 @@ You can now run the app and start using HyperTrack. You can see your devices on 
 
 ## Dashboard
 
-Once your app is running, go to the [dashboard](https://v3.dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
+Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
 ![Dashboard](Images/Dashboard.png)
