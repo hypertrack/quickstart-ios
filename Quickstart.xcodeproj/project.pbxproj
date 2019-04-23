@@ -17,7 +17,7 @@
 		3192F0042226BED2003D6B4B /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192F0002226BED2003D6B4B /* WorkSans-Bold.ttf */; };
 		3192F0052226BED2003D6B4B /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3192F0012226BED2003D6B4B /* WorkSans-SemiBold.ttf */; };
 		3192F0082226E831003D6B4B /* SRCopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192F0072226E831003D6B4B /* SRCopyableLabel.swift */; };
-		BBCEC0206B695ABFE5516A16 /* Pods_Quickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */; };
+		B24A5FD1D7FC281B2A1B9B57 /* Pods_Quickstart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C79667CBE903518CABC981 /* Pods_Quickstart.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +33,9 @@
 		3192F0002226BED2003D6B4B /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		3192F0012226BED2003D6B4B /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		3192F0072226E831003D6B4B /* SRCopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCopyableLabel.swift; sourceTree = "<group>"; };
-		3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.release.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.release.xcconfig"; sourceTree = "<group>"; };
-		7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.debug.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.debug.xcconfig"; sourceTree = "<group>"; };
+		7D900C14731CD0BA538CEF1E /* Pods-Quickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.release.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.release.xcconfig"; sourceTree = "<group>"; };
+		96C79667CBE903518CABC981 /* Pods_Quickstart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quickstart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB58941A1DA099794FA0FCF5 /* Pods-Quickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.debug.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,28 +43,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBCEC0206B695ABFE5516A16 /* Pods_Quickstart.framework in Frameworks */,
+				B24A5FD1D7FC281B2A1B9B57 /* Pods_Quickstart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		066897E2EFCA3198AE7EB80E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7C0AAF624E6EE07510B33F50 /* Pods_Quickstart.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3192EFDC2225C38C003D6B4B = {
 			isa = PBXGroup;
 			children = (
 				3192EFE72225C38D003D6B4B /* Quickstart */,
 				3192EFE62225C38D003D6B4B /* Products */,
 				BA8594D92621E14E8DCCD68D /* Pods */,
-				066897E2EFCA3198AE7EB80E /* Frameworks */,
+				F95C52AA64AD43066614807B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,10 +97,18 @@
 		BA8594D92621E14E8DCCD68D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */,
-				3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */,
+				EB58941A1DA099794FA0FCF5 /* Pods-Quickstart.debug.xcconfig */,
+				7D900C14731CD0BA538CEF1E /* Pods-Quickstart.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F95C52AA64AD43066614807B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96C79667CBE903518CABC981 /* Pods_Quickstart.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,11 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3192EFF92225C393003D6B4B /* Build configuration list for PBXNativeTarget "Quickstart" */;
 			buildPhases = (
-				5A13615483FB689E2613FD48 /* [CP] Check Pods Manifest.lock */,
+				20E9C3D683CFC1BCEF5E5A65 /* [CP] Check Pods Manifest.lock */,
 				3192EFE12225C38D003D6B4B /* Sources */,
 				3192EFE22225C38D003D6B4B /* Frameworks */,
 				3192EFE32225C38D003D6B4B /* Resources */,
-				0D10CAA4DA53CE38E6BF2B65 /* [CP] Embed Pods Frameworks */,
+				AEFFC9C5EB70717EC9F60D8B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -189,7 +189,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D10CAA4DA53CE38E6BF2B65 /* [CP] Embed Pods Frameworks */ = {
+		20E9C3D683CFC1BCEF5E5A65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Quickstart-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEFFC9C5EB70717EC9F60D8B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -213,28 +235,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Quickstart/Pods-Quickstart-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A13615483FB689E2613FD48 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Quickstart-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -390,40 +390,40 @@
 		};
 		3192EFFA2225C393003D6B4B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88A7C1BE96343D73175B77BA /* Pods-Quickstart.debug.xcconfig */;
+			baseConfigurationReference = EB58941A1DA099794FA0FCF5 /* Pods-Quickstart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4925W78YQ;
 				INFOPLIST_FILE = Quickstart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperTrack.Quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		3192EFFB2225C393003D6B4B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DFDD1FF5A55D3CF5C77E94B /* Pods-Quickstart.release.xcconfig */;
+			baseConfigurationReference = 7D900C14731CD0BA538CEF1E /* Pods-Quickstart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4925W78YQ;
 				INFOPLIST_FILE = Quickstart/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperTrack.Quickstart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

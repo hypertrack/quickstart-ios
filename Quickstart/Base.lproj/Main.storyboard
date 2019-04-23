@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ypq-jy-2DZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ypq-jy-2DZ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,46 +38,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="zju-78-LEA">
-                                <rect key="frame" x="30" y="234" width="260" height="120"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH9-kh-wyg" userLabel="LocationButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="15"/>
-                                        <state key="normal" title="Request Location Permission">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="locationPermissionButtonClicked" destination="ypq-jy-2DZ" eventType="touchUpInside" id="KoQ-J7-EIp"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmc-cC-Rxx" userLabel="ActivityButton">
-                                        <rect key="frame" x="0.0" y="75" width="260" height="45"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="15"/>
-                                        <state key="normal" title="Request Activity Permission">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="activityPermissionButtonClicked" destination="ypq-jy-2DZ" eventType="touchUpInside" id="DwT-DB-cKp"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="SJX-yW-gbo"/>
-                                </constraints>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s26-pf-JiT" userLabel="TrackingButton">
                                 <rect key="frame" x="30" y="479" width="260" height="45"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -94,31 +54,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="resumeTrackingButtonClicked" destination="ypq-jy-2DZ" eventType="touchUpInside" id="fQ8-oM-n6h"/>
+                                    <action selector="trackingButtonClicked" destination="ypq-jy-2DZ" eventType="touchUpInside" id="m4x-SP-Jh4"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zju-78-LEA" firstAttribute="leading" secondItem="eAQ-X4-F0O" secondAttribute="leading" constant="30" id="6XF-r7-94Q"/>
+                            <constraint firstItem="eAQ-X4-F0O" firstAttribute="trailing" secondItem="s26-pf-JiT" secondAttribute="trailing" constant="30" id="2ye-W8-BsA"/>
                             <constraint firstItem="uu5-w7-nex" firstAttribute="top" secondItem="eAQ-X4-F0O" secondAttribute="top" constant="44" id="7bh-X2-jJU"/>
                             <constraint firstItem="eAQ-X4-F0O" firstAttribute="bottom" secondItem="s26-pf-JiT" secondAttribute="bottom" constant="44" id="BUq-xP-McD"/>
-                            <constraint firstItem="zju-78-LEA" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="CNQ-dr-bdl"/>
-                            <constraint firstItem="eAQ-X4-F0O" firstAttribute="trailing" secondItem="zju-78-LEA" secondAttribute="trailing" constant="30" id="I2E-LQ-7rz"/>
                             <constraint firstItem="uu5-w7-nex" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="OWi-aM-VUZ"/>
-                            <constraint firstItem="s26-pf-JiT" firstAttribute="width" secondItem="zju-78-LEA" secondAttribute="width" id="QeN-ud-hrW"/>
                             <constraint firstItem="Szc-2Z-ZYa" firstAttribute="top" secondItem="uu5-w7-nex" secondAttribute="bottom" constant="8" id="ccR-U5-opF"/>
                             <constraint firstItem="Szc-2Z-ZYa" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="hSe-pK-3KV"/>
-                            <constraint firstItem="s26-pf-JiT" firstAttribute="centerX" secondItem="eAQ-X4-F0O" secondAttribute="centerX" id="iNm-K0-paA"/>
                             <constraint firstItem="Szc-2Z-ZYa" firstAttribute="width" secondItem="eAQ-X4-F0O" secondAttribute="width" constant="-60" id="xfH-FU-Otw"/>
-                            <constraint firstItem="zju-78-LEA" firstAttribute="centerY" secondItem="eAQ-X4-F0O" secondAttribute="centerY" id="y9z-w3-MzX"/>
+                            <constraint firstItem="s26-pf-JiT" firstAttribute="leading" secondItem="eAQ-X4-F0O" secondAttribute="leading" constant="30" id="ypc-yj-Mos"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eAQ-X4-F0O"/>
                     </view>
                     <connections>
-                        <outlet property="activityPermissionButton" destination="kmc-cC-Rxx" id="lXN-sP-wP5"/>
                         <outlet property="deviceID" destination="Szc-2Z-ZYa" id="HYB-7T-xDZ"/>
-                        <outlet property="locationPermissionButton" destination="eH9-kh-wyg" id="DzB-Mm-Nqr"/>
                         <outlet property="trackingButton" destination="s26-pf-JiT" id="wYS-Xj-76e"/>
                     </connections>
                 </viewController>

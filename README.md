@@ -15,7 +15,7 @@
 We use Publishable Key to identify your devices. To get one:
 1. Go to the [Signup page](https://dashboard.hypertrack.com/signup). Enter your email address and password.
 2. Open the verification link sent to your email.
-3. Open the [Keys page](https://dashboard.hypertrack.com/account/keys), where you can copy your Publishable Key.
+3. Open the [Setup page](https://dashboard.hypertrack.com/setup), where you can copy your Publishable Key.
 
 ![Signup flow](Images/Signup_flow.png)
 
@@ -51,7 +51,7 @@ Run the app on your phone and you should see the following control interface:
 
 ![Quickstart app](Images/On_Device.png)
 
-After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location and activity data. You can pause or resume the tracking with the button below.
+After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location and activity data. You can start or stop tracking with the button below.
 
 Check out the [dashboard](#dashboard) to see the live location of your devices on the map.
 
@@ -59,7 +59,7 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 
 ### Requirements
 
-HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
+HyperTrack SDK supports iOS 10 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
@@ -67,29 +67,40 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 2. [Enable background location updates](#step-2-enable-background-location-updates)
 3. [Add purpose strings](#step-3-add-purpose-strings)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
-5. [Ask the user for permissions](#step-5-ask-the-user-for-permissions)
-6. [Identify devices](#step-6-optional-identify-devices)
+5. [(optional) Start and stop tracking manually](#step-5-optional-start-and-stop-tracking-manually)
+6. [(optional) Identify devices](#step-6-optional-identify-devices)
+7. [(optional) Send custom events](#step-7-optional-send-custom-events)
 
 
 #### Step 1: Add HyperTrack SDK to your Podfile
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
-Using command line run `pod init` in your project directory to create a Podfile. Put `pod 'HyperTrack'` in the Podfile:
+Using command line run `pod init` in your project directory to create a Podfile. Put the following code (changing target placeholder to your target name) in the Podfile:
 
 ```ruby
-platform :ios, '9.0'
+platform :ios, '10.0'
 inhibit_all_warnings!
 
 target '<Your app name>' do
   use_frameworks!
   pod 'HyperTrack'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if ['GRDB.swift', 'CocoaLumberjack'].include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
+      end
+    end
+  end
+end
 ```
 
 Run `pod install`. CocoaPods will build the dependencies and create a workspace (`.xcworkspace`) for you.
 
-If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Set the version to `4.2`. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you. Don't forget to set it to `4.2`. Additionally, after running `pod install`, make sure that the same setting is present in `CocoaLumberjack` and `GRDB.swift` target inside the `Pods` project.
+If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you.
 
 #### Step 2: Enable background location updates
 
@@ -113,16 +124,19 @@ Be advised, purpose strings are mandatory, and the app crashes without them.
 
 #### Step 4: Initialize the SDK
 
-Put the initialization code inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method
+Put the initialization call inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
 
 ##### Swift
 
 ```swift
-HyperTrack.initialize(publishableKey: "<#Paste your Publishable Key here#>") { (error) in
-    /// perform post initialization actions
-    /// handle errors if any
-}
+HyperTrack.initialize(
+    publishableKey: "<#Paste your Publishable Key here#>",
+    delegate: self,
+    startsTracking: true,
+    requestsPermissions: true)
 ```
+
+You can omit `delegate`, `startsTracking`, and `requestsPermissions` in Swift. They are `nil`, `true`, `true` by default.
 
 ##### Objective-C
 
@@ -135,38 +149,70 @@ Import the SDK:
 Initialize the SDK:
 
 ```objc
-[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>" completionHandler:^(HTSDKError * _Nullable error) {
-    /// perform post initialization actions
-    /// handle errors if any
-}];
+[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>"
+                           delegate:self
+                     startsTracking:true
+                requestsPermissions:true];
 ```
 
-#### Step 5: Ask the user for permissions
-
-In your app, use our convenience functions to ask for the location and activity permissions. HyperTrack SDK needs both to generate accurate and enriched location data.
+* Delegate method is called if the SDK encounters a critical error that prevents it from running. This includes:
+  - Initialization errors, like denied Location or Motion permissions (`.permissionDenied`)
+  - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`.authorizationError`)
+  - Incorrectly typed Publishable Key (`.invalidPublishableKey`)
+  - General errors. Please contact support if you encounter those (`.generalError`)
 
 ##### Swift
 
 ```swift
-HyperTrack.requestLocationPermission { (error) in
-    /// handle errors if any
-}
-
-HyperTrack.requestActivityPermission { (error) in
-    /// handle errors if any
+extension AppDelegate: HyperTrackDelegate {
+  func hyperTrack(_ hyperTrack: HyperTrack.Type, didEncounterCriticalError criticalError: HyperTrackCriticalError) {
+    /// Handle errors here
+  }
 }
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK requestLocationPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
-    /// handle errors if any
-}];
+@interface AppDelegate () <HTSDKDelegate>
+@end
 
-[HTSDK requestActivityPermissionWithCompletionHandler:^(HTSDKError * _Nullable error) {
-    /// handle errors if any
-}];
+@implementation AppDelegate
+
+- (void)hyperTrack:(Class)hyperTrack didEncounterCriticalError:(HTSDKCriticalError *)criticalError {
+    /// Handle errors here
+}
+
+@end
+```
+
+* `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method. 
+* `requestsPermissions: true` will request Location and Motion permissions on your behalf.
+
+#### Step 5. (optional) Start and stop tracking manually
+
+You can start and stop tracking manually. When you start tracking you can control if HyperTrack should request the appropriate Location and Motion permissions on your behalf.
+
+##### Swift
+
+```swift
+/// Start tracking
+HyperTrack.startTracking(requestsPermissions: true)
+/// `requestsPermissions` is `true` by default so you can use the shortened version
+HyperTrack.startTracking()
+
+/// Stop tracking
+HyperTrack.stopTracking()
+```
+
+##### Objective-C
+
+```objc
+/// Start tracking
+[HTSDK startTrackingWithRequestsPermissions:true];
+
+/// Stop tracking
+[HTSDK stopTracking];
 ```
 
 #### Step 6. (optional) Identify devices
@@ -176,17 +222,40 @@ Another approach is to tag device with a name that will make it easy to distingu
 ##### Swift
 
 ```swift
-HyperTrack.setDevice(name: "Device name", metaData: nil, { (error) in 
-  /// handle errors if any
-});
+HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
+    /// Handle errors here
+}
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK setDeviceForName: "Device name" metaData: nil completionHandler:^(HTSDKError * _Nullable error) {
-    /// handle errors if any
-}];
+[HTSDK setDeviceWithName:@"Device name"
+             andMetadata:nil
+       completionHandler:^(HTSDKDeviceNameError * _Nullable error) {
+           /// Handle errors here
+       }];
+```
+
+#### Step 7. (optional) Send custom events
+
+The SDK supports sending custom event data that can be converted to JSON from a Dictionary type.
+
+##### Swift
+
+```swift
+HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "cusom values"]) { (error) in
+    /// Handle errors here
+}
+```
+
+##### Objective-C
+
+```objc
+[HTSDK sendCustomEventWithMetadata:@{ @"custom keys": @"cusom values" }
+                 completionHandler:^(HTSDKCustomEventError * _Nullable error) {
+                     /// Handle errors here
+                 }];
 ```
 
 #### You are all set
