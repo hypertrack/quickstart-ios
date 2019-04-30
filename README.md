@@ -246,7 +246,7 @@ The SDK supports sending custom event data that can be converted to JSON from a 
 ##### Swift
 
 ```swift
-HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "cusom values"]) { (error) in
+HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "custom values"]) { (error) in
     /// Handle errors here
 }
 ```
@@ -254,7 +254,7 @@ HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "cusom values"]) { (err
 ##### Objective-C
 
 ```objc
-[HTSDK sendCustomEventWithMetadata:@{ @"custom keys": @"cusom values" }
+[HTSDK sendCustomEventWithMetadata:@{ @"custom keys": @"custom values" }
                  completionHandler:^(HTSDKCustomEventError * _Nullable error) {
                      /// Handle errors here
                  }];
