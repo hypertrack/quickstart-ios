@@ -9,6 +9,8 @@
 * [Quickstart](#quickstart-app)–Start with a ready-to-go app with reliable background service
 * [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
 * [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
+* [FAQs](#frequently-asked-questions)–Frequently asked questions
+* [Support](#support)–Support
 
 ## Publishable Key
 
@@ -267,3 +269,14 @@ You can now run the app and start using HyperTrack. You can see your devices on 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
 ![Dashboard](Images/Dashboard.png)
+
+
+## Frequently Asked Questions
+- [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
+
+
+#### Error: Access to Activity services has not been authorized
+You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
+
+## Support
+Join our [Slack community](http://slack.hypertrack.com) for instant responses. You can also email us at help@hypertrack.com.
