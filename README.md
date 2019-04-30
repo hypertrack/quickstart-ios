@@ -272,7 +272,6 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 
 
 ## Frequently Asked Questions
-- [Requirements](#requirements)
 - [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
 
 
