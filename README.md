@@ -241,7 +241,9 @@ HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
 
 #### Step 7. (optional) Send custom events
 
-The SDK supports sending custom event data that can be converted to JSON from a Dictionary type.
+Use this optional method if you want to tag the tracked data with custom events that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
+
+The SDK supports sending custom event data that can be converted to JSON from a `Dictionary` type.
 
 ##### Swift
 
