@@ -10,6 +10,7 @@
 * [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
 * [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
 * [FAQs](#frequently-asked-questions)–Frequently asked questions
+* [Support](#support)–Support
 
 ## Publishable Key
 
@@ -274,9 +275,6 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 - [Requirements](#requirements)
 - [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
 
-
-#### Requirements
-We currently support iOS 10.0+
 
 #### Error: Access to Activity services has not been authorized
 You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
