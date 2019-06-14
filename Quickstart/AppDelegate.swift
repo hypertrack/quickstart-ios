@@ -45,7 +45,7 @@ extension AppDelegate: HyperTrackDelegate {
   /// received tracking is stopped. You need to call `startTracking()` to try again with the same
   /// initialization settings or call `initizalize()` with new Publishable Key.
   func hyperTrack(
-    _ hyperTrack: HyperTrack.Type,
+    _ hyperTrack: AnyClass,
     didEncounterCriticalError criticalError: HyperTrackCriticalError
     ) {
     NotificationCenter.default.post(

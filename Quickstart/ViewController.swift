@@ -30,7 +30,10 @@ class ViewController: UIViewController {
       object: nil)
     /// Use this property to obtain the unique Device ID that HyperTrack uses to identify a device
     /// on Dashboard
-    deviceID.text = HyperTrack.deviceID
+    let yourDeviceID = HyperTrack.deviceID
+    deviceID.text = yourDeviceID
+    // You can copy it from the console or from the phone
+    print("Your device ID:\n\(yourDeviceID)")
     
     updateTrackingButtonTitle()
   }
