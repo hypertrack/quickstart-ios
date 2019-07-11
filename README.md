@@ -69,12 +69,13 @@ HyperTrack SDK supports iOS 10 and above, using Swift or Objective-C.
 2. [Enable background location updates](#step-2-enable-background-location-updates)
 3. [Add purpose strings](#step-3-add-purpose-strings)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
-5. [(optional) Start and stop tracking manually](#step-5-optional-start-and-stop-tracking-manually)
-6. [(optional) Identify devices](#step-6-optional-identify-devices)
-7. [(optional) Send custom events](#step-7-optional-send-custom-events)
+5. [Enable remote notifications](#step-5-enable-remote-notifications)
+6. [(optional) Start and stop tracking manually](#step-6-optional-start-and-stop-tracking-manually)
+7. [(optional) Identify devices](#step-7-optional-identify-devices)
+8. [(optional) Send custom events](#step-8-optional-send-custom-events)
 
 
-#### Step 1: Add HyperTrack SDK to your Podfile
+#### Step 1. Add HyperTrack SDK to your Podfile
 
 We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [install it here](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -104,13 +105,13 @@ Run `pod install`. CocoaPods will build the dependencies and create a workspace 
 
 If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you.
 
-#### Step 2: Enable background location updates
+#### Step 2. Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates".
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-#### Step 3: Add purpose strings
+#### Step 3. Add purpose strings
 
 Set the following purpose strings in the `Info.plist` file:
 
@@ -124,7 +125,7 @@ You can ask for "When In Use" permission only, but be advised that the device wi
 
 Be advised, purpose strings are mandatory, and the app crashes without them.
 
-#### Step 4: Initialize the SDK
+#### Step 4. Initialize the SDK
 
 Put the initialization call inside your `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
 
@@ -191,7 +192,132 @@ extension AppDelegate: HyperTrackDelegate {
 * `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method. 
 * `requestsPermissions: true` will request Location and Motion permissions on your behalf.
 
-#### Step 5. (optional) Start and stop tracking manually
+#### Step 5. Enable remote notifications
+
+The SDK has a bi-directional communication model with the server. This enables the SDK to run on a variable frequency model, which balances the fine trade-off between low latency tracking and battery efficiency, and improves robustness. For this purpose, the iOS SDK uses APNs silent remote notifications.
+
+> This guide assumes you have configured APNs in your application. If you haven't, read the [iOS documentation on APNs](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns).
+
+##### Configure APNs on the dashboard
+
+Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
+
+This key will only be used to send remote push notifications to your apps.
+
+##### Enable remote notifications in the app
+
+In the app capabilities, ensure that **remote notifications** inside background modes is enabled.
+
+![Remote Notifications in Xcode](Images/Remote_Notifications.png)
+
+In the same tab, snsure that **push notifications** is enabled.
+
+![Push Notifications in Xcode](Images/Push_Notifications.png)
+
+##### Registering and receiving notifications
+
+The following changes inside AppDelegate will register the SDK for push notifications and route HyperTrack notifications to the SDK.
+
+###### Register for notifications
+
+Inside `didFinishLaunchingWithOptions`, use the SDK method to register for notifications.
+
+**Swift**
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    HyperTrack.registerForRemoteNotifications()
+    return true
+}
+```
+
+**Objective-C**
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [HTSDK registerForRemoteNotifications];
+    return YES;
+}
+```
+
+###### Register device token
+
+Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegisterForRemoteNotificationsWithError` methods, add the relevant lines so that HyperTrack can register the device token.
+
+**Swift**
+
+```swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+}
+    
+func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
+}
+```
+
+**Objective-C**
+
+```objc
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [HTSDK didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    [HTSDK didFailToRegisterForRemoteNotificationsWithError:error];
+}
+```
+
+###### Receive notifications
+
+Inside the `didReceiveRemoteNotification` method, add the HyperTrack receiver. This method parses only the notifications sent from HyperTrack.
+
+**Swift**
+
+```swift
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    HyperTrack.didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+}
+```
+
+**Objective-C**
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [HTSDK didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+```
+
+If you want to make sure to only pass HyperTrack notifications to the SDK, you can use the "hypertrack" key:
+
+**Swift**
+
+```swift
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    if userInfo["hypertrack"] != nil {
+        // This is HyperTrack's notification
+        HyperTrack.didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+    } else {
+        // Handle your server's notification here
+    }
+}
+```
+
+**Objective-C**
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if (userInfo[@"hypertrack"] != nil) {
+        // This is HyperTrack's notification
+        [HTSDK didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+    } else {
+        // Handle your server's notification here
+    }
+}
+
+```
+
+#### Step 6. (optional) Start and stop tracking manually
 
 You can start and stop tracking manually. When you start tracking you can control if HyperTrack should request the appropriate Location and Motion permissions on your behalf.
 
@@ -217,7 +343,7 @@ HyperTrack.stopTracking()
 [HTSDK stopTracking];
 ```
 
-#### Step 6. (optional) Identify devices
+#### Step 7. (optional) Identify devices
 All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
 Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
 
@@ -239,7 +365,7 @@ HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
        }];
 ```
 
-#### Step 7. (optional) Send custom events
+#### Step 8. (optional) Send custom events
 
 Use this optional method if you want to tag the tracked data with custom events that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 

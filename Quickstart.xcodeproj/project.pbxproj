@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		1F76FC882D5084B1F786358B /* Pods-Quickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quickstart.debug.xcconfig"; path = "Target Support Files/Pods-Quickstart/Pods-Quickstart.debug.xcconfig"; sourceTree = "<group>"; };
+		3138B57C22D3629400C7F47B /* Quickstart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quickstart.entitlements; sourceTree = "<group>"; };
 		3192EFE52225C38D003D6B4B /* Quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3192EFE82225C38D003D6B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3192EFEF2225C38D003D6B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		3192EFE72225C38D003D6B4B /* Quickstart */ = {
 			isa = PBXGroup;
 			children = (
+				3138B57C22D3629400C7F47B /* Quickstart.entitlements */,
 				3192EFE82225C38D003D6B4B /* AppDelegate.swift */,
 				3192EFFC2226A91C003D6B4B /* ViewController.swift */,
 				3192F0072226E831003D6B4B /* SRCopyableLabel.swift */,
@@ -147,6 +149,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -384,6 +389,7 @@
 			baseConfigurationReference = 1F76FC882D5084B1F786358B /* Pods-Quickstart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Quickstart/Quickstart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4925W78YQ;
 				INFOPLIST_FILE = Quickstart/Info.plist;
@@ -404,6 +410,7 @@
 			baseConfigurationReference = AF81AAA6B56F7E2E6F8421D2 /* Pods-Quickstart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Quickstart/Quickstart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4925W78YQ;
 				INFOPLIST_FILE = Quickstart/Info.plist;

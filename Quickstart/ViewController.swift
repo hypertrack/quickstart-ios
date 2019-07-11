@@ -14,13 +14,13 @@ class ViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.setTrackingButtonActionToStop),
-      name: Notification.Name.trackingStarted,
+      name: Notification.Name.HyperTrackStartedTracking,
       object: nil)
     
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.setTrackingButtonActionToStart),
-      name: Notification.Name.trackingStopped,
+      name: Notification.Name.HyperTrackStoppedTracking,
       object: nil)
     
     NotificationCenter.default.addObserver(

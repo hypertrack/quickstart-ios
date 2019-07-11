@@ -32,8 +32,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       startsTracking: continueTracking,
       requestsPermissions: continueTracking)
     
+    /// Register for remote notifications to allow bi-directional communication model with the
+    /// server. This enables the SDK to run on a variable frequency model, which balances the
+    /// fine trade-off between low latency tracking and battery efficiency, and improves robustness.
+    /// This includes the methods below in the Remote Notifications section
+    HyperTrack.registerForRemoteNotifications()
     return true
   }
+    
+    // MARK: Remote Notifications
+    
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+        ) {
+        HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: Error
+        ) {
+        HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+        ) {
+        HyperTrack.didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+    }
+    
 }
 
 /// It's best to assign HyperTrack delegate once when you want to start tracking and to not
@@ -48,8 +78,6 @@ extension AppDelegate: HyperTrackDelegate {
     _ hyperTrack: AnyClass,
     didEncounterCriticalError criticalError: HyperTrackCriticalError
     ) {
-    NotificationCenter.default.post(
-      Notification(name: Notification.Name.trackingStopped))
     displayError(criticalError)
   }
   /// For this simple example we display alerts with an ability to try to start tracking again.
@@ -73,20 +101,9 @@ extension AppDelegate: HyperTrackDelegate {
         style: UIAlertAction.Style.default,
         handler: { _ in
           HyperTrack.startTracking()
-          NotificationCenter.default.post(
-            Notification(name: Notification.Name.trackingStarted))
         }
       )
     )
     viewController.present(alert, animated: true, completion: nil)
   }
-}
-
-/// Here we use Notifications to push tracking statuses to every controller that needs to update
-/// it's UI.
-extension Notification.Name {
-  /// Tracking stopped notification
-  static let trackingStopped = Notification.Name("HyperTrackStoppedTracking")
-  /// Tracking started notification
-  static let trackingStarted = Notification.Name("HyperTrackStartedTracking")
 }
