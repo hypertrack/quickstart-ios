@@ -210,7 +210,7 @@ In the app capabilities, ensure that **remote notifications** inside background 
 
 ![Remote Notifications in Xcode](Images/Remote_Notifications.png)
 
-In the same tab, snsure that **push notifications** is enabled.
+In the same tab, ensure that **push notifications** is enabled.
 
 ![Push Notifications in Xcode](Images/Push_Notifications.png)
 
