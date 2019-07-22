@@ -365,16 +365,16 @@ HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
        }];
 ```
 
-#### Step 8. (optional) Send custom events
+#### Step 8. (optional) Set a trip marker
 
-Use this optional method if you want to tag the tracked data with custom events that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
+Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 
-The SDK supports sending custom event data that can be converted to JSON from a `Dictionary` type.
+The SDK supports sending trip marker data that can be converted to JSON from a `Dictionary` type.
 
 ##### Swift
 
 ```swift
-HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "custom values"]) { (error) in
+HyperTrack.setTripMarker(["trip keys": "trip values"]) { (error) in
     /// Handle errors here
 }
 ```
@@ -382,10 +382,10 @@ HyperTrack.sendCustomEvent(withMetadata: ["custom keys": "custom values"]) { (er
 ##### Objective-C
 
 ```objc
-[HTSDK sendCustomEventWithMetadata:@{ @"custom keys": @"custom values" }
-                 completionHandler:^(HTSDKCustomEventError * _Nullable error) {
-                     /// Handle errors here
-                 }];
+[HTSDK setTripMarker:@{ @"trip keys": @"trip values" }
+   completionHandler:^(HTSDKCustomEventError * _Nullable error) {
+       /// Handle errors here
+   }];
 ```
 
 #### You are all set
