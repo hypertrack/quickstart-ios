@@ -2,6 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.3.5-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example iOS app that has everything you need to get started in minutes.
 
@@ -189,7 +190,7 @@ extension AppDelegate: HyperTrackDelegate {
 @end
 ```
 
-* `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method. 
+* `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method.
 * `requestsPermissions: true` will request Location and Motion permissions on your behalf.
 
 #### Step 5. Enable remote notifications
@@ -250,7 +251,7 @@ Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegi
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
 }
-    
+
 func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
 }
