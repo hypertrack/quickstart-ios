@@ -22,8 +22,6 @@
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>&lt;YOUR APP&gt; needs to access this device's location for &lt;REASON&gt;</string>
 	<key>NSMotionUsageDescription</key>

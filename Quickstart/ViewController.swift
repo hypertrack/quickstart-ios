@@ -23,11 +23,6 @@ class ViewController: UIViewController {
       name: Notification.Name.HyperTrackStoppedTracking,
       object: nil)
     
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(self.updateTrackingButtonTitle),
-      name: UIApplication.willEnterForegroundNotification,
-      object: nil)
     /// Use this property to obtain the unique Device ID that HyperTrack uses to identify a device
     /// on Dashboard
     let yourDeviceID = HyperTrack.deviceID

@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.3.5-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.7.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example iOS app that has everything you need to get started in minutes.
 
@@ -62,7 +62,7 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 
 ### Requirements
 
-HyperTrack SDK supports iOS 10 and above, using Swift or Objective-C.
+HyperTrack SDK supports iOS 11 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
@@ -83,7 +83,7 @@ We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [instal
 Using command line run `pod init` in your project directory to create a Podfile. Put the following code (changing target placeholder to your target name) in the Podfile:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '11.0'
 inhibit_all_warnings!
 
 target '<Your app name>' do
@@ -118,8 +118,6 @@ Set the following purpose strings in the `Info.plist` file:
 
 ![Always authorization location](Images/Always_Authorization.png)
 
-Include `Privacy - Location Always Usage Description` key only when you need iOS 10 compatibility.
-
 You can ask for "When In Use" permission only, but be advised that the device will see a blue bar at the top while your app is running.
 
 ![In use authorization location](Images/In_Use_Authorization.png)
@@ -133,14 +131,8 @@ Put the initialization call inside your `AppDelegate`'s `application:didFinishLa
 ##### Swift
 
 ```swift
-HyperTrack.initialize(
-    publishableKey: "<#Paste your Publishable Key here#>",
-    delegate: self,
-    startsTracking: true,
-    requestsPermissions: true)
+HyperTrack.publishableKey = "<#Paste your Publishable Key here#>"
 ```
-
-You can omit `delegate`, `startsTracking`, and `requestsPermissions` in Swift. They are `nil`, `true`, `true` by default.
 
 ##### Objective-C
 
@@ -153,45 +145,84 @@ Import the SDK:
 Initialize the SDK:
 
 ```objc
-[HTSDK initializeWithPublishableKey:@"<#Paste your Publishable Key here#>"
-                           delegate:self
-                     startsTracking:true
-                requestsPermissions:true];
+HTSDK.publishableKey:@"<#Paste your Publishable Key here#>";
 ```
 
-* Delegate method is called if the SDK encounters a critical error that prevents it from running. This includes:
+##### NSNotifications
+
+Critical error notification is called if the SDK encounters a critical error that prevents it from running. This includes:
   - Initialization errors, like denied Location or Motion permissions (`.permissionDenied`)
   - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`.authorizationError`)
   - Incorrectly typed Publishable Key (`.invalidPublishableKey`)
   - General errors. Please contact support if you encounter those (`.generalError`)
 
-##### Swift
+
+###### Swift
 
 ```swift
-extension AppDelegate: HyperTrackDelegate {
-  func hyperTrack(_ hyperTrack: HyperTrack.Type, didEncounterCriticalError criticalError: HyperTrackCriticalError) {
+...
+/// Inside didFinishLaunchingWithOptions or other place where SDK is initialized
+NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(self.reactToCriticalError(_:)),
+        name: Notification.Name.HyperTrackDidEncounterCriticalError,
+        object: nil)
+...
+
+@objc func reactToCriticalError(_ notification: NSNotification) {
+    let hyperTrackError = notification.hyperTrackError()
     /// Handle errors here
-  }
 }
 ```
 
-##### Objective-C
+###### Objective-C
 
 ```objc
-@interface AppDelegate () <HTSDKDelegate>
-@end
+...
+/// Inside didFinishLaunchingWithOptions or other place where SDK is initialized
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(reactToCriticalError:)
+                                             name:HyperTrackDidEncounterCriticalErrorNotification
+                                           object:nil];
+...
 
-@implementation AppDelegate
-
-- (void)hyperTrack:(Class)hyperTrack didEncounterCriticalError:(HTSDKCriticalError *)criticalError {
+- (void)reactToCriticalError:(NSNotification *)notification {
+    HTSDKCriticalError *criticalError = criticalErrorNotification.HTSDKError;
     /// Handle errors here
 }
-
-@end
 ```
 
-* `startsTracking: true` will try to start tracking right away, without calling the appropriate `HyperTrack.startTracking()` method.
-* `requestsPermissions: true` will request Location and Motion permissions on your behalf.
+You can also observe when SDK starts and stops tracking and update the UI:
+
+###### Swift
+
+```swift
+NotificationCenter.default.addObserver(
+    self,
+    selector: #selector(trackingStarted),
+    name: NSNotification.Name.HyperTrackStartedTracking,
+    object: nil)
+
+NotificationCenter.default.addObserver(
+    self,
+    selector: #selector(trackingStopped),
+    name: NSNotification.Name.HyperTrackStoppedTracking,
+    object: nil)
+```
+
+###### Objective-C
+
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(trackingStarted)
+                                             name:HyperTrackStartedTrackingNotification
+                                           object:nil];
+
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(trackingStopped)
+                                             name:HyperTrackStoppedTrackingNotification
+                                           object:nil];
+```
 
 #### Step 5. Enable remote notifications
 
@@ -326,8 +357,6 @@ You can start and stop tracking manually. When you start tracking you can contro
 
 ```swift
 /// Start tracking
-HyperTrack.startTracking(requestsPermissions: true)
-/// `requestsPermissions` is `true` by default so you can use the shortened version
 HyperTrack.startTracking()
 
 /// Stop tracking
@@ -338,7 +367,7 @@ HyperTrack.stopTracking()
 
 ```objc
 /// Start tracking
-[HTSDK startTrackingWithRequestsPermissions:true];
+[HTSDK startTracking];
 
 /// Stop tracking
 [HTSDK stopTracking];
@@ -351,19 +380,13 @@ Another approach is to tag device with a name that will make it easy to distingu
 ##### Swift
 
 ```swift
-HyperTrack.setDevice(name: "Device name", andMetadata: nil) { (error) in
-    /// Handle errors here
-}
+HyperTrack.deviceName = "Device name"
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK setDeviceWithName:@"Device name"
-             andMetadata:nil
-       completionHandler:^(HTSDKDeviceNameError * _Nullable error) {
-           /// Handle errors here
-       }];
+HTSDK.deviceName = @"Device name";
 ```
 
 #### Step 8. (optional) Set a trip marker
@@ -375,18 +398,21 @@ The SDK supports sending trip marker data that can be converted to JSON from a `
 ##### Swift
 
 ```swift
-HyperTrack.setTripMarker(["trip keys": "trip values"]) { (error) in
-    /// Handle errors here
+HyperTrackMetadata.makeMetadata(["trip keys": "trip values"], success: { (metadata) in
+    HyperTrack.setTripMarker(metadata)
+}) { (error) in
+    // Handle errors
 }
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDK setTripMarker:@{ @"trip keys": @"trip values" }
-   completionHandler:^(HTSDKCustomEventError * _Nullable error) {
-       /// Handle errors here
-   }];
+[HTSDKMetadata makeMetadata:@{@"trip keys": @"trip values"} success:^(HTSDKMetadata * _Nonnull metadata) {
+    [HTSDK setTripMarker:metadata];
+} failure:^(HTSDKMetadataError * _Nonnull error) {
+    // Handle errors
+}];
 ```
 
 #### You are all set

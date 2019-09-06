@@ -3,7 +3,7 @@ inhibit_all_warnings!
 
 target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrack'
+  pod 'HyperTrack', '3.7.0'
 end
 
 post_install do |installer|
