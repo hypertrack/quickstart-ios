@@ -74,7 +74,7 @@ HyperTrack SDK supports iOS 11 and above, using Swift or Objective-C.
 6. [(optional) Start and stop tracking manually](#step-6-optional-start-and-stop-tracking-manually)
 7. [(optional) Identify devices](#step-7-optional-identify-devices)
 8. [(optional) Create trip](#step-8-optional-create-trip)
-9. [(optional) Set trip markers](#step-9-optional-send-custom-events)
+9. [(optional) Set trip markers](#step-9-optional-set-a-trip-marker)
 
 
 #### Step 1. Add HyperTrack SDK to your Podfile
