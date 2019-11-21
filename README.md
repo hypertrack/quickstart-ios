@@ -119,11 +119,10 @@ Set the following purpose strings in the `Info.plist` file:
 
 ![Always authorization location](Images/Always_Authorization.png)
 
-You can ask for "When In Use" permission only, but be advised that the device will see a blue bar at the top while your app is running.
-
-![In use authorization location](Images/In_Use_Authorization.png)
-
+HyperTrack SDK requires "Always" permissions to reliably track user's location.
 Be advised, purpose strings are mandatory, and the app crashes without them.
+
+See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
 
 #### Step 4. Initialize the SDK
 
@@ -489,10 +488,27 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 
 ## Frequently Asked Questions
 - [Error: Access to Activity services has not been authorized](#error-access-to-activity-services-has-not-been-authorized)
+- [What are the best practices for handling permissions on iOS?](#what-are-the-best-practices-for-handling-permissions-on-ios)
 
 
-#### Error: Access to Activity services has not been authorized
+### Error: Access to Activity services has not been authorized
 You are running the quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
 
+### What are the best practices for handling permissions on iOS?
+In [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/app-architecture/requesting-permission/) Apple recommends:
+- Requesting permissions only when they are needed in the flow of the app. If you app is centered around location tracking, then asking for permissions at the app launch can be understandable for users. On the other hand, if location tracking is just one of the features, then it makes sense to request them only when the feature is activated.
+- Providing short and specific purpose string. Purpose string should explain the value that location and motion tracking provides. Examples of motion tracking benefits: improves battery life by using algorithms based on motion tracking data, provides story-like details for historical tracking data, gives live feedback on current activity.
+
+In addition a lot of great apps [provide a special screen](https://pttrns.com/?scid=56) explaining the need for permissions before asking them. If permissions are denied you can guide the user to the specific page in the Settings.app to change permissions (see [this guide](https://www.macstories.net/ios/a-comprehensive-guide-to-all-120-settings-urls-supported-by-ios-and-ipados-13-1/) for special deep-links for the Settings.app).
+
+On iOS 13 Apple introduced a new "Provisional Always" authorization state (see [this SO answer](https://stackoverflow.com/a/58822468/1352537) for details). In short:
+
+- there is no API to detect this state
+- during this state there are no location events in background
+- user sees his permissions as granted and sees "While Using" state in Settings.app
+- app sees permissions as granted with "Always" state.
+
+HyperTrack is working on ways to detect this state and provide APIs that would enable app developers to display explanation screens that will guide the user back to Settings.app to switch permissions from "While Using" to "Always".
+
 ## Support
-Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
+Join our [Slack community](http://slack.hypertrack.com) for instant responses. You can also email us at help@hypertrack.com.
