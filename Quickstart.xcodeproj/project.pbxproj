@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3109F1CC23C6114C00508D11 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3109F1CB23C6114C00508D11 /* ErrorViewController.swift */; };
 		3192EFE92225C38D003D6B4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3192EFE82225C38D003D6B4B /* AppDelegate.swift */; };
 		3192EFF02225C38D003D6B4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFEE2225C38D003D6B4B /* Main.storyboard */; };
 		3192EFF22225C393003D6B4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3192EFF12225C393003D6B4B /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3109F1CB23C6114C00508D11 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		3138B57C22D3629400C7F47B /* Quickstart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quickstart.entitlements; sourceTree = "<group>"; };
 		3192EFE52225C38D003D6B4B /* Quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3192EFE82225C38D003D6B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				3138B57C22D3629400C7F47B /* Quickstart.entitlements */,
 				3192EFE82225C38D003D6B4B /* AppDelegate.swift */,
 				3192EFFC2226A91C003D6B4B /* ViewController.swift */,
+				3109F1CB23C6114C00508D11 /* ErrorViewController.swift */,
 				3192F0072226E831003D6B4B /* SRCopyableLabel.swift */,
 				3192EFF32225C393003D6B4B /* LaunchScreen.storyboard */,
 				3192EFEE2225C38D003D6B4B /* Main.storyboard */,
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3192EFE92225C38D003D6B4B /* AppDelegate.swift in Sources */,
+				3109F1CC23C6114C00508D11 /* ErrorViewController.swift in Sources */,
 				3192EFFD2226A91C003D6B4B /* ViewController.swift in Sources */,
 				3192F0082226E831003D6B4B /* SRCopyableLabel.swift in Sources */,
 			);

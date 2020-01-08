@@ -9,75 +9,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
+  ) -> Bool {
+    
+    window = UIWindow(frame: UIScreen.main.bounds)
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     /// Set your Publishable Key here
-    HyperTrack.publishableKey = "<#Paste your Publishable Key here#>"
+    let publishableKey = HyperTrack.PublishableKey(<#"PASTE_YOUR_PUBLISHABLE_KEY_HERE"#>)!
+    switch HyperTrack.makeSDK(publishableKey: publishableKey) {
     
-    /// React to critical tracking errors
-    NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(self.reactToCriticalError(_:)),
-        name: Notification.Name.HyperTrackDidEncounterCriticalError,
-        object: nil)
+    case let .success(hyperTrack):
+      let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+      viewController.hyperTrack = hyperTrack
+      window?.rootViewController = viewController
     
+    case let .failure(fatalError):
+      let errorViewController = storyboard.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
+      errorViewController.error = fatalError
+      window?.rootViewController = errorViewController
+    }
+    window?.makeKeyAndVisible()
     /// Register for remote notifications
     HyperTrack.registerForRemoteNotifications()
     return true
   }
-    
-    @objc func reactToCriticalError(_ notification: NSNotification) {
-        displayError(notification.hyperTrackError())
-    }
-    
-    func displayError(_ error:HyperTrackCriticalError) {
-        
-        guard let window = self.window,
-            let viewController = window.rootViewController else { return }
-        
-        let alert = UIAlertController(
-            title: "Error",
-            message: error.errorMessage,
-            preferredStyle: .alert)
-        
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        )
-        
-        alert.addAction(
-            UIAlertAction(
-                title: "Try again",
-                style: UIAlertAction.Style.default,
-                handler: { _ in
-                    HyperTrack.startTracking()
-            }
-            )
-        )
-        viewController.present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: Remote Notifications
-    
-    func application(
-        _ application: UIApplication,
-        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-        ) {
-        HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
-    }
-    
-    func application(
-        _ application: UIApplication,
-        didFailToRegisterForRemoteNotificationsWithError error: Error
-        ) {
-        HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
-    }
-    
-    func application(
-        _ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
-        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-        ) {
-        HyperTrack.didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
-    }
-    
+  
+  // MARK: Remote Notifications
+  
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+  }
+  
+  func application(
+    _ application: UIApplication,
+    didFailToRegisterForRemoteNotificationsWithError error: Error
+  ) {
+    HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
+  }
+  
+  func application(
+    _ application: UIApplication,
+    didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+  ) {
+    HyperTrack.didReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+  }
 }

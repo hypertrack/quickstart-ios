@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.7.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.0.1-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example iOS app that has everything you need to get started in minutes.
 
@@ -84,22 +84,12 @@ We use [CocoaPods](https://cocoapods.org) to distribute the SDK, you can [instal
 Using command line run `pod init` in your project directory to create a Podfile. Put the following code (changing target placeholder to your target name) in the Podfile:
 
 ```ruby
-platform :ios, '11.0'
+platform :ios, '9.0'
 inhibit_all_warnings!
 
-target '<Your app name>' do
+target 'YourApp' do
   use_frameworks!
-  pod 'HyperTrack'
-end
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    if ['GRDB.swift', 'CocoaLumberjack'].include? target.name
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.2'
-      end
-    end
-  end
+  pod 'HyperTrack', '4.0.1'
 end
 ```
 
@@ -130,8 +120,27 @@ Put the initialization call inside your `AppDelegate`'s `application:didFinishLa
 
 ##### Swift
 
+Handling production/development errors:
+
 ```swift
-HyperTrack.publishableKey = "<#Paste your Publishable Key here#>"
+let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
+
+switch HyperTrack.makeSDK(publishableKey: publishableKey) {
+case let .success(hyperTrack):
+  // Use `hyperTrack` instance
+case let .failure(fatalError):
+  // Handle errors, for example using switch
+}
+```
+
+Ignoring any errors:
+
+```swift
+let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
+
+if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
+  // Use `hyperTrack` instance
+}
 ```
 
 ##### Objective-C
@@ -142,53 +151,158 @@ Import the SDK:
 @import HyperTrack;
 ```
 
-Initialize the SDK:
+Initialize the SDK.
+Handling production/development errors:
 
 ```objc
-HTSDK.publishableKey:@"<#Paste your Publishable Key here#>";
+NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+HTResult *result = [HTSDK makeSDKWithPublishableKey:publishableKey];
+if (result.hyperTrack != nil) {
+  // Use `hyperTrack` instance from `result.hyperTrack`
+} else {
+  // Handle errors, for example using switch:
+  switch ([result.error code]) {
+    case HTFatalErrorProductionLocationServicesUnavalible:
+    case HTFatalErrorProductionMotionActivityServicesUnavalible:
+      // Handle a case where device is fully untrackable (either iPhone 5 or lower
+      // or not an iPhone
+      break;
+    case HTFatalErrorProductionMotionActivityPermissionsDenied:
+      // Handle motion permissions denied error. Enabling permissions will
+      // restart the app
+    default:
+      // Other errors should only happen during development
+      break;
+  }
+}
+```
+
+Ignoring errors:
+
+```objc
+NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+HTSDK *hyperTrack = [[HTSDK alloc] initWithPublishableKey:publishableKey];
+if (hyperTrack != nil) {
+  // Use `hyperTrack` instance
+}
 ```
 
 ##### NSNotifications
 
-Critical error notification is called if the SDK encounters a critical error that prevents it from running. This includes:
-  - Initialization errors, like denied Location or Motion permissions (`.permissionDenied`)
-  - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`.authorizationError`)
-  - Incorrectly typed Publishable Key (`.invalidPublishableKey`)
-  - General errors. Please contact support if you encounter those (`.generalError`)
-
+Restorable and Unrestorable error notifications are called if the SDK encounters an error that prevents it from tracking. SDK can recover in runtime from Restorable errors if the error reason is resolved. Errors include:
+  - Initialization errors, like denied Location or Motion permissions (`RestorableError.locationPermissionsDenied`)
+  - Authorization errors from the server. If the trial period ends and there is no credit card tied to the account, this is the error that will be called (`RestorableError.trialEnded`)
+  - Incorrectly typed Publishable Key (`UnrestorableError.invalidPublishableKey`)
 
 ###### Swift
 
+If you want to handle errors using the same selector:
 ```swift
-...
-/// Inside didFinishLaunchingWithOptions or other place where SDK is initialized
 NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(self.reactToCriticalError(_:)),
-        name: Notification.Name.HyperTrackDidEncounterCriticalError,
-        object: nil)
+  self,
+  selector: #selector(trackingError(notification:)),
+  name: HyperTrack.didEncounterUnrestorableErrorNotification,
+  object: nil
+)
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(trackingError(notification:)),
+  name: HyperTrack.didEncounterRestorableErrorNotification,
+  object: nil
+)
+
 ...
 
-@objc func reactToCriticalError(_ notification: NSNotification) {
-    let hyperTrackError = notification.hyperTrackError()
-    /// Handle errors here
+@objc func trackingError(notification: Notification) {
+  if let trackingError = notification.hyperTrackTrackingError() {
+    // Handle TrackingError, which is an enum of Restorable or Unrestorable error
+  }
+}
+```
+
+If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:
+
+```swift
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(unrestorableError(notification:)),
+  name: HyperTrack.didEncounterUnrestorableErrorNotification,
+  object: nil
+)
+NotificationCenter.default.addObserver(
+  self,
+  selector: #selector(restorableError(notification:)),
+  name: HyperTrack.didEncounterRestorableErrorNotification,
+  object: nil
+)
+
+...
+
+@objc func restorableError(notification: Notification) {
+  if let restorableError = notification.hyperTrackRestorableError() {
+    // Handle RestorableError
+  }
+}
+
+@objc func unrestorableError(notification: Notification) {
+  if let unrestorableError = notification.hyperTrackUnrestorableError() {
+    // Handle UnrestorableError
+  }
 }
 ```
 
 ###### Objective-C
 
+If you want to handle errors using the same selector:
 ```objc
-...
-/// Inside didFinishLaunchingWithOptions or other place where SDK is initialized
 [[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(reactToCriticalError:)
-                                             name:HyperTrackDidEncounterCriticalErrorNotification
+                                         selector:@selector(hyperTrackEncounteredTrackingError:)
+                                             name:HTSDK.didEncounterRestorableErrorNotification
                                            object:nil];
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredTrackingError:)
+                                             name:HTSDK.didEncounterUnrestorableErrorNotification
+                                           object:nil];
+
 ...
 
-- (void)reactToCriticalError:(NSNotification *)notification {
-    HTSDKCriticalError *criticalError = criticalErrorNotification.HTSDKError;
-    /// Handle errors here
+- (void)hyperTrackEncounteredTrackingError:(NSNotification *)notification {
+  // Use tracking error helper
+  NSError *error = [notification hyperTrackTrackingError];
+  if (error != nil) {
+    if ([[error domain] isEqualToString:NSError.HTRestorableErrorDomain]) {
+      // Handle restorable error
+    } else if ([[error domain] isEqualToString:NSError.HTUnrestorableErrorDomain]) {
+      // Handle unrestorable error
+    }
+  }
+}
+
+```
+
+If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredRestorableError:)
+                                             name:HTSDK.didEncounterRestorableErrorNotification
+                                           object:nil];
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(hyperTrackEncounteredUnrestorableError:)
+                                             name:HTSDK.didEncounterUnrestorableErrorNotification
+                                           object:nil];
+
+...
+
+- (void)hyperTrackEncounteredRestorableError:(NSNotification *)notification { 
+  NSError *restorableError = [notification hyperTrackRestorableError]);
+  // Handle RestorableError
+ }
+
+- (void)hyperTrackEncounteredUnrestorableError:(NSNotification *)notification {
+  NSError *unrestorableError = [notification hyperTrackUnrestorableError]);
+  // Handle UnrestorableError
 }
 ```
 
@@ -198,16 +312,17 @@ You can also observe when SDK starts and stops tracking and update the UI:
 
 ```swift
 NotificationCenter.default.addObserver(
-    self,
-    selector: #selector(trackingStarted),
-    name: NSNotification.Name.HyperTrackStartedTracking,
-    object: nil)
-
+  self,
+  selector: #selector(self.trackingStarted),
+  name: HyperTrack.startedTrackingNotification,
+  object: nil
+)
 NotificationCenter.default.addObserver(
-    self,
-    selector: #selector(trackingStopped),
-    name: NSNotification.Name.HyperTrackStoppedTracking,
-    object: nil)
+  self,
+  selector: #selector(self.trackingStopped),
+  name: HyperTrack.stoppedTrackingNotification,
+  object: nil
+)
 ```
 
 ###### Objective-C
@@ -215,12 +330,12 @@ NotificationCenter.default.addObserver(
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(trackingStarted)
-                                             name:HyperTrackStartedTrackingNotification
+                                             name:HTSDK.startedTrackingNotification
                                            object:nil];
 
 [[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(trackingStopped)
-                                             name:HyperTrackStoppedTrackingNotification
+                                             name:HTSDK.stoppedTrackingNotification
                                            object:nil];
 ```
 
@@ -357,20 +472,20 @@ You can start and stop tracking manually. When you start tracking you can contro
 
 ```swift
 /// Start tracking
-HyperTrack.startTracking()
+hyperTrack.start()
 
 /// Stop tracking
-HyperTrack.stopTracking()
+hyperTrack.stop()
 ```
 
 ##### Objective-C
 
 ```objc
 /// Start tracking
-[HTSDK startTracking];
+[hyperTrack start];
 
 /// Stop tracking
-[HTSDK stopTracking];
+[hyperTrack stop];
 ```
 
 #### Step 7. (optional) Identify devices
@@ -380,13 +495,39 @@ Another approach is to tag device with a name that will make it easy to distingu
 ##### Swift
 
 ```swift
-HyperTrack.deviceName = "Device name"
+hyperTrack.setDeviceName("Device name")
 ```
 
 ##### Objective-C
 
 ```objc
-HTSDK.deviceName = @"Device name";
+hyperTrack.deviceName = @"Device name";
+```
+
+You can additionaly tag devices with custom metadata. Metadata should be representable in JSON.
+
+
+##### Swift
+
+```swift
+if let metadata = HyperTrack.Metadata(rawValue: ["key": "value"]) {
+  hyperTrack.setDeviceMetadata(metadata)
+} else {
+  // Metadata can't be represented in JSON
+}
+```
+
+##### Objective-C
+
+```objc
+NSDictionary *dictionary = @{@"key": @"value"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack setDeviceMetadata:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
 ```
 
 #### Step 8. (optional) Create trip
@@ -453,26 +594,30 @@ After the trip has ended, you can access its aggregate data (entire route, time,
 
 Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 
-The SDK supports sending trip marker data that can be converted to JSON from a `Dictionary` type.
+The process is the same as for device metadata:
 
 ##### Swift
 
 ```swift
-HyperTrackMetadata.makeMetadata(["trip keys": "trip values"], success: { (metadata) in
-    HyperTrack.setTripMarker(metadata)
-}) { (error) in
-    // Handle errors
+if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
+  hyperTrack.addTripMarker(metadata)
+} else { 
+  // Metadata can't be represented in JSON
 }
 ```
 
 ##### Objective-C
 
 ```objc
-[HTSDKMetadata makeMetadata:@{@"trip keys": @"trip values"} success:^(HTSDKMetadata * _Nonnull metadata) {
-    [HTSDK setTripMarker:metadata];
-} failure:^(HTSDKMetadataError * _Nonnull error) {
-    // Handle errors
-}];
+NSDictionary *dictionary = @{@"status": @"PICKING_UP"};
+
+HTMetadata *metadata = [[HTMetadata alloc] initWithDictionary:dictionary];
+if (metadata != nil) {
+  [self.hyperTrack addTripMarker:metadata];
+} else {
+  // Metadata can't be represented in JSON
+}
+
 ```
 
 #### You are all set
