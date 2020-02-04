@@ -1,27 +1,31 @@
 import UIKit
 import HyperTrack
+import CoreLocation
+import CoreMotion
 
 class ViewController: UIViewController {
   
   var hyperTrack: HyperTrack!
   /// The label displaying user's Device ID
   @IBOutlet var deviceID: SRCopyableLabel!
-  /// Button that starts or stops tracking
-  @IBOutlet var trackingButton: UIButton!
+  /// Tracking indicator that shows the tracking status
+  @IBOutlet var trackingStatus: UIButton!
+  /// Location manager used for asking permissions
+  let locationManager: CLLocationManager = CLLocationManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    /// Register for notifications to update the tracking button state
+    /// Register for notifications to update the tracking indicator state
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(self.setTrackingButtonActionToStop),
+      selector: #selector(self.setTrackingIndicatorToTracking),
       name: HyperTrack.startedTrackingNotification,
       object: nil
     )
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(self.setTrackingButtonActionToStart),
+      selector: #selector(self.setTrackingIndicatorToNotTracking),
       name: HyperTrack.stoppedTrackingNotification,
       object: nil
     )
@@ -47,37 +51,60 @@ class ViewController: UIViewController {
     // You can copy it from the console or from the phone
     print("Your device ID:\n\(yourDeviceID)")
     
-    updateTrackingButtonTitle()
+    updateTrackingInticatorTitle()
+    
+    askForLocationPermissions()
+    askForMotionPermissions()
   }
   
-  // MARK: Tracking button
+  // MARK: Permissions
   
-  @objc func updateTrackingButtonTitle() {
-    if hyperTrack.isRunning {
-      setTrackingButtonActionToStop()
+  func askForLocationPermissions() {
+    print("Current Location authorization status: \(CLLocationManager.authorizationStatus())")
+    self.locationManager.requestAlwaysAuthorization()
+  }
+  
+  @IBAction func askForMotionPermissions() {
+    if CMMotionActivityManager.isActivityAvailable() {
+      print(
+        "Current Motion Activity authorization status: \(CMMotionActivityManager.authorizationStatus())"
+      )
+
+      let motionActivityManager = CMMotionActivityManager()
+      let motionActivityQueue = OperationQueue()
+
+      motionActivityManager.queryActivityStarting(
+        from: Date.distantPast, to: Date(), to: motionActivityQueue
+      ) { (activities, error) in
+        if error != nil {
+          print("Motion Activity permissions denied")
+        } else if activities != nil || error == nil {
+          print("Motion Activity permissions authorized")
+        }
+      }
     } else {
-      setTrackingButtonActionToStart()
+      print("This is not an iPhone, and it doesn't have Motion Activity hardware")
     }
   }
   
-  @IBAction func trackingButtonClicked() {
+  // MARK: Tracking indicator
+  
+  @objc func updateTrackingInticatorTitle() {
     if hyperTrack.isRunning {
-      hyperTrack.stop()
-      setTrackingButtonActionToStart()
+      setTrackingIndicatorToTracking()
     } else {
-      hyperTrack.start()
-      setTrackingButtonActionToStop()
+      setTrackingIndicatorToNotTracking()
     }
   }
   
-  @objc func setTrackingButtonActionToStart() {
-    trackingButton.setTitle("Start Tracking", for: .normal)
-    trackingButton.backgroundColor = UIColor.black
+  @objc func setTrackingIndicatorToNotTracking() {
+    trackingStatus.setTitle("Not Tracking", for: .normal)
+    trackingStatus.backgroundColor = UIColor.black
   }
   
-  @objc func setTrackingButtonActionToStop() {
-    trackingButton.setTitle("Stop Tracking", for: .normal)
-    trackingButton.backgroundColor = UIColor(red: 0.00, green: 0.79, blue: 0.29, alpha: 1.00)
+  @objc func setTrackingIndicatorToTracking() {
+    trackingStatus.setTitle("Tracking", for: .normal)
+    trackingStatus.backgroundColor = UIColor(red: 0.00, green: 0.79, blue: 0.29, alpha: 1.00)
   }
   
   // MARK: - Showing runtime errors
@@ -108,16 +135,16 @@ class ViewController: UIViewController {
       switch restorableError {
       case .locationPermissionsDenied:
         type = "Location Permissions Denied"
-        message = "The user denied location permissions."
+        message = "Please grant location permissions in Settings.app"
       case .locationServicesDisabled:
         type = "Location Services Disabled"
-        message = "The user disabled location services systemwide."
+        message = "Please enable location services in Settings.app"
       case .motionActivityServicesDisabled:
         type = "Motion Activity Services Disabled"
-        message = "The user disabled motion services systemwide."
+        message = "Please enable motion services in Settings.app"
       case .networkConnectionUnavailable:
         type = "Network Connection Unavailable"
-        message = "There was no network connection for 12 hours."
+        message = "There was no network connection for 12 hours. Stopped collecting tracking data."
       case .trialEnded:
         type = "Trial Ended"
         message = "HyperTrack's trial period has ended."
@@ -132,7 +159,7 @@ class ViewController: UIViewController {
         message = "Publishable Key wan't found in HyperTrack's database."
       case .motionActivityPermissionsDenied:
         type = "Motion Activity Permissions Denied"
-        message = "Motion activity permissions denied after SDK's initialization. Granting them will restart the app, so in effect, they are denied during this app's session."
+        message = "Please grant motion permissions in Settings.app"
       }
     }
     return (type, message)

@@ -38,7 +38,7 @@ cd quickstart-ios
 ```
 ### Step 2: Install the SDK dependency
 
-Quickstart app uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version is advised.
+Quickstart app uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version of CocoaPods is advised.
 
 If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -54,7 +54,7 @@ Run the app on your phone and you should see the following control interface:
 
 ![Quickstart app](Images/On_Device.png)
 
-After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), SDK starts collecting location and activity data. You can start or stop tracking with the button below.
+After enabling location and activity permissions (choose "Always Allow" if you want the app to collect location data in the background), you can start or stop tracking using the [REST API](https://docs.hypertrack.com/#references-apis).
 
 Check out the [dashboard](#dashboard) to see the live location of your devices on the map.
 
@@ -62,19 +62,17 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 
 ### Requirements
 
-HyperTrack SDK supports iOS 11 and above, using Swift or Objective-C.
+HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 
 ### Step by step instructions
 
 1. [Add HyperTrack SDK to your Podfile](#step-1-add-hypertrack-sdk-to-your-podfile)
 2. [Enable background location updates](#step-2-enable-background-location-updates)
-3. [Add purpose strings](#step-3-add-purpose-strings)
+3. [Handle location and motion permissions](#step-3-handle-location-and-motion-permissions)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Enable remote notifications](#step-5-enable-remote-notifications)
-6. [(optional) Start and stop tracking manually](#step-6-optional-start-and-stop-tracking-manually)
-7. [(optional) Identify devices](#step-7-optional-identify-devices)
-8. [(optional) Create trip](#step-8-optional-create-trip)
-9. [(optional) Set trip markers](#step-9-optional-set-a-trip-marker)
+6. [(optional) Identify devices](#step-7-optional-identify-devices)
+7. [(optional) Set trip markers](#step-7-optional-set-a-trip-marker)
 
 
 #### Step 1. Add HyperTrack SDK to your Podfile
@@ -97,22 +95,41 @@ Run `pod install`. CocoaPods will build the dependencies and create a workspace 
 
 If your project uses Objective-C only, you need to configure `SWIFT_VERSION` in your project's Build Settings. Alternatively, you can create an empty Swift file, and Xcode will create this setting for you.
 
+If you are using Xcode 10.1, which doesn't support Swift 5, add this `post_install` script at the bottom of your Podfile:
+
+<details>
+<summary>Show code block</summary>
+
+```ruby
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if ['GRDB.swift'].include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
+      end
+    end
+  end
+end
+```
+
+</details>
+
 #### Step 2. Enable background location updates
 
 Enable Background Modes in your project target's Capabilities tab. Choose "Location updates".
 
 ![Capabilities tab in Xcode](Images/Background_Modes.png)
 
-#### Step 3. Add purpose strings
+#### Step 3. Handle location and motion permissions
 
 Set the following purpose strings in the `Info.plist` file:
 
 ![Always authorization location](Images/Always_Authorization.png)
 
 HyperTrack SDK requires "Always" permissions to reliably track user's location.
-Be advised, purpose strings are mandatory, and the app crashes without them.
+Be advised, purpose strings are mandatory.
 
-See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
+Your app needs to make sure that it has location and motion permissions for location tracking to work. See [this F.A.Q. page](#what-are-the-best-practices-for-handling-permissions-on-ios) for details on permissions best practices.
 
 #### Step 4. Initialize the SDK
 
@@ -120,7 +137,8 @@ Put the initialization call inside your `AppDelegate`'s `application:didFinishLa
 
 ##### Swift
 
-Handling production/development errors:
+<details>
+<summary>Handling production/development errors:</summary>
 
 ```swift
 let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
@@ -133,7 +151,10 @@ case let .failure(fatalError):
 }
 ```
 
-Ignoring any errors:
+</details>
+
+<details>
+<summary>Ignoring any errors:</summary>
 
 ```swift
 let publishableKey = HyperTrack.PublishableKey("PASTE_YOUR_PUBLISHABLE_KEY_HERE")!
@@ -142,6 +163,8 @@ if let hyperTrack = try? HyperTrack(publishableKey: publishableKey) {
   // Use `hyperTrack` instance
 }
 ```
+
+</details>
 
 ##### Objective-C
 
@@ -152,7 +175,9 @@ Import the SDK:
 ```
 
 Initialize the SDK.
-Handling production/development errors:
+
+<details>
+<summary>Handling production/development errors:</summary>
 
 ```objc
 NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
@@ -178,7 +203,10 @@ if (result.hyperTrack != nil) {
 }
 ```
 
-Ignoring errors:
+</details>
+
+<details>
+<summary>Ignoring errors:</summary>
 
 ```objc
 NSString *publishableKey = @"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
@@ -189,6 +217,8 @@ if (hyperTrack != nil) {
 }
 ```
 
+</details>
+
 ##### NSNotifications
 
 Restorable and Unrestorable error notifications are called if the SDK encounters an error that prevents it from tracking. SDK can recover in runtime from Restorable errors if the error reason is resolved. Errors include:
@@ -198,7 +228,9 @@ Restorable and Unrestorable error notifications are called if the SDK encounters
 
 ###### Swift
 
-If you want to handle errors using the same selector:
+<details>
+<summary>If you want to handle errors using the same selector:</summary>
+
 ```swift
 NotificationCenter.default.addObserver(
   self,
@@ -222,7 +254,10 @@ NotificationCenter.default.addObserver(
 }
 ```
 
-If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:
+</details>
+
+<details>
+<summary>If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:</summary>
 
 ```swift
 NotificationCenter.default.addObserver(
@@ -253,9 +288,13 @@ NotificationCenter.default.addObserver(
 }
 ```
 
+</details>
+
 ###### Objective-C
 
-If you want to handle errors using the same selector:
+<details>
+<summary>If you want to handle errors using the same selector:</summary>
+
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(hyperTrackEncounteredTrackingError:)
@@ -282,7 +321,11 @@ If you want to handle errors using the same selector:
 
 ```
 
-If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:
+</details>
+
+<details>
+<summary>If you want to handle errors separately, or handle only Restorable or only Unrestorable errors:</summary>
+
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self
                                          selector:@selector(hyperTrackEncounteredRestorableError:)
@@ -305,6 +348,10 @@ If you want to handle errors separately, or handle only Restorable or only Unres
   // Handle UnrestorableError
 }
 ```
+
+</details>
+
+---
 
 You can also observe when SDK starts and stops tracking and update the UI:
 
@@ -464,31 +511,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 ```
 
-#### Step 6. (optional) Start and stop tracking manually
-
-You can start and stop tracking manually. When you start tracking you can control if HyperTrack should request the appropriate Location and Motion permissions on your behalf.
-
-##### Swift
-
-```swift
-/// Start tracking
-hyperTrack.start()
-
-/// Stop tracking
-hyperTrack.stop()
-```
-
-##### Objective-C
-
-```objc
-/// Start tracking
-[hyperTrack start];
-
-/// Stop tracking
-[hyperTrack stop];
-```
-
-#### Step 7. (optional) Identify devices
+#### Step 6. (optional) Identify devices
 All devices tracked on HyperTrack are uniquely identified using [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). You can get this identifier programmatically in your app by calling `getDeviceId` after initialization.
 Another approach is to tag device with a name that will make it easy to distinguish them on HyperTrack Dashboard.
 
@@ -530,67 +553,7 @@ if (metadata != nil) {
 }
 ```
 
-#### Step 8. (optional) Create trip
-
-
-Create trips to track the device journey going from one place to another. Most of the time, you are not only interested in the latest location but a set of location-related data. For example how long you should expect someone to arrive, what distance someone traveled during his working day etc.
-For such cases, you can scope location data at the required level of granularity by creating a trip, through submitting a request like below to HyperTrack backend.
-
-You can use the node sample request below or create one yourself using [API Reference](https://docs.hypertrack.com/#references-apis-trips-post-trips)
-<details>
-
-```Javascript
-
-const request = require('request');
-// deviceId is obtained from the previous step
-const deviceId = "DEVICE_ID_HERE";
-// get two strings below from https://dashboard.hypertrack.com/setup
-const accountId = 'ACCOUNT_ID';
-const secretKey = 'SECRET_KEY';
-
-const trip ={
-  "device_id": deviceId,
-  "destination": {
-    "geometry": { "type": "Point", "coordinates": [-115.122993, 36.089361] }
-  },
-  "geofences": [
-    {
-      "geometry": { "type": "Point", "coordinates": [-115.1768575, 36.0949879] },
-      "metadata": { "building": "Luxor" }
-    }
-  ],
-  "metadata": {"destination": "Paradise"}
-};
-
-const options = {
-    "uri": "https://v3.api.hypertrack.com/trips/",
-    "auth": {'user': accountId, 'pass': secretKey},
-    "json": trip
-};
-
-request.post(options, function (error, response, body) {
-  if (error) {
-    return console.error('Trip creation failed:', error);
-  }
-  console.log('Server responded with:', response.statusCode);
-  if (response.statusCode == 201) {
-    console.log('Successfully created trip', body);
-  }
-});
-
-```
-
-</details>
-
-You'll receive a response with the trip object inside. Trip object [contains lots useful fields](https://docs.hypertrack.com/#references-apis-trips-get-trips-trip_id) but let's take a look at `views.embed_url` value, that contains a reference to trip details web view like below
-![elvis-on-trip-to-paradise](https://user-images.githubusercontent.com/10487613/69039721-26c05d80-09f5-11ea-8047-2be04607dbb4.png)
-
-After the trip has ended, you can access its aggregate data (entire route, time, etc.). You can review the trip using the replay feature in the web view mentioned above.
-
-![trip-replay](https://user-images.githubusercontent.com/10487613/69040653-d1854b80-09f6-11ea-9fc3-4930d68667b1.gif)
-
-
-#### Step 9. (optional) Set a trip marker
+#### Step 7. (optional) Set a trip marker
 
 Use this optional method if you want to tag the tracked data with trip markers that happen in your app. E.g. user marking a task as done, user tapping a button to share location, user accepting an assigned job, device entering a geofence, etc.
 
