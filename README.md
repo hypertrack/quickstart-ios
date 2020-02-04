@@ -29,7 +29,8 @@ Next, you can [start with the Quickstart app](#quickstart-app), or can [integrat
 1. [Clone this repo](#step-1-clone-this-repo)
 2. [Install the SDK dependency](#step-2-install-the-sdk-dependency)
 3. [Set your Publishable Key](#step-3-set-your-publishable-key)
-4. [Run the Quickstart app](#step-4-run-the-quickstart-app)
+4. [Setup silent push notifications](#step-4-setup-silent-push-notifications)
+5. [Run the Quickstart app](#step-5-run-the-quickstart-app)
 
 ### Step 1: Clone this repo
 ```bash
@@ -48,7 +49,11 @@ Run `pod install` inside the cloned directory. After CocoaPods creates the `Quic
 
 Open the Quickstart project inside the workspace and set your [Publishable Key](#publishable-key) inside the placeholder in the `AppDelegate.swift` file.
 
-### Step 4: Run the Quickstart app
+### Step 4: Setup silent push notifications
+
+Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created from Apple Developer console > Certificates, Identifiers & Profiles > Keys) and fill in your Team ID (Can be seen in Account > Membership).
+
+### Step 5: Run the Quickstart app
 
 Run the app on your phone and you should see the following control interface:
 
@@ -338,7 +343,7 @@ NotificationCenter.default.addObserver(
 
 ...
 
-- (void)hyperTrackEncounteredRestorableError:(NSNotification *)notification { 
+- (void)hyperTrackEncounteredRestorableError:(NSNotification *)notification {
   NSError *restorableError = [notification hyperTrackRestorableError]);
   // Handle RestorableError
  }
@@ -396,7 +401,7 @@ The SDK has a bi-directional communication model with the server. This enables t
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
 
-This key will only be used to send remote push notifications to your apps.
+This key will only be used to send silent push notifications to your apps.
 
 ##### Enable remote notifications in the app
 
@@ -564,7 +569,7 @@ The process is the same as for device metadata:
 ```swift
 if let metadata = HyperTrack.Metadata(rawValue: ["status": "PICKING_UP"]) {
   hyperTrack.addTripMarker(metadata)
-} else { 
+} else {
   // Metadata can't be represented in JSON
 }
 ```
