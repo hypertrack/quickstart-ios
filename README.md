@@ -76,7 +76,7 @@ HyperTrack SDK supports iOS 9 and above, using Swift or Objective-C.
 3. [Handle location and motion permissions](#step-3-handle-location-and-motion-permissions)
 4. [Initialize the SDK](#step-4-initialize-the-sdk)
 5. [Enable remote notifications](#step-5-enable-remote-notifications)
-6. [(optional) Identify devices](#step-7-optional-identify-devices)
+6. [(optional) Identify devices](#step-6-optional-identify-devices)
 7. [(optional) Set trip markers](#step-7-optional-set-a-trip-marker)
 
 
