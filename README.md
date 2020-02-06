@@ -10,6 +10,7 @@
 * [Quickstart](#quickstart-app)–Start with a ready-to-go app with reliable background service
 * [Create a trip](#create-a-trip)-Create a trip using our REST API to start tracking location
 * [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
+* [Documentation](#documentation)-Refer to documentation for integration guides and API reference
 * [Support](#support)–Support
 
 ## Publishable Key
@@ -86,6 +87,10 @@ Substitute:
 ## Dashboard
 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
+
+## Documentation
+
+You can find our integration guide at the [SDK's README](https://github.com/hypertrack/sdk-ios#integrate-the-sdk) and API reference on our [documentation website](https://docs.hypertrack.com/#references-sdks-ios). There is also a full in-code reference for all SDK methods.
 
 ## Support
 Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
