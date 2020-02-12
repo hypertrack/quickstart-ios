@@ -30,6 +30,10 @@ inside the placeholder in the `AppDelegate.swift` file.
 
 ### Setup silent push notifications
 
+Set up silent push notifications to manage on-device tracking using HyperTrack cloud APIs from your server.
+
+> If you prefer to use your own messaging service to manage server-to-device communication, use the [sync](https://docs.hypertrack.com/#references-sdks-ios) method.
+
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup).
 Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created from Apple Developer console > Certificates, Identifiers & Profiles > Keys)
 and fill in your Team ID (Can be seen in Account > Membership).
