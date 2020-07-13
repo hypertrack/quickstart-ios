@@ -49,9 +49,8 @@ class ViewController: UIViewController {
     let yourDeviceID = hyperTrack.deviceID
     deviceID.text = yourDeviceID
     // You can copy it from the console or from the phone
-    print("Your device ID:\n\(yourDeviceID)")
     
-    updateTrackingInticatorTitle()
+    print("Your device ID:\n\(yourDeviceID)")
     
     askForLocationPermissions()
     askForMotionPermissions()
@@ -60,15 +59,11 @@ class ViewController: UIViewController {
   // MARK: Permissions
   
   func askForLocationPermissions() {
-    print("Current Location authorization status: \(CLLocationManager.authorizationStatus())")
     self.locationManager.requestAlwaysAuthorization()
   }
   
-  @IBAction func askForMotionPermissions() {
+  func askForMotionPermissions() {
     if CMMotionActivityManager.isActivityAvailable() {
-      print(
-        "Current Motion Activity authorization status: \(CMMotionActivityManager.authorizationStatus())"
-      )
 
       let motionActivityManager = CMMotionActivityManager()
       let motionActivityQueue = OperationQueue()
@@ -88,14 +83,6 @@ class ViewController: UIViewController {
   }
   
   // MARK: Tracking indicator
-  
-  @objc func updateTrackingInticatorTitle() {
-    if hyperTrack.isRunning {
-      setTrackingIndicatorToTracking()
-    } else {
-      setTrackingIndicatorToNotTracking()
-    }
-  }
   
   @objc func setTrackingIndicatorToNotTracking() {
     trackingStatus.setTitle("Not Tracking", for: .normal)
@@ -133,15 +120,27 @@ class ViewController: UIViewController {
     switch trackingError {
     case let .restorableError(restorableError):
       switch restorableError {
+      case .locationPermissionsNotDetermined:
+        type = "Location Permissions Not Determined"
+        message = "The user has not chosen whether the app can use location services."
+      case .locationPermissionsCantBeAskedInBackground:
+        type = "Location Permissions Can't Be Asked In Background"
+        message = "The user has not chosen whether the app can use location services."
+      case .locationPermissionsRestricted:
+        type = "Location Permissions Restricted"
+        message = "The app is not authorized to use location services."
       case .locationPermissionsDenied:
         type = "Location Permissions Denied"
-        message = "Please grant location permissions in Settings.app"
+        message = "The user denied location permissions."
+      case .locationPermissionsInsufficientForBackground:
+        type = "Location Permissions Insufficient For Background"
+        message = "Can't start tracking in background with When In Use location permissions."
       case .locationServicesDisabled:
         type = "Location Services Disabled"
-        message = "Please enable location services in Settings.app"
+        message = "The user disabled location services systemwide."
       case .motionActivityServicesDisabled:
         type = "Motion Activity Services Disabled"
-        message = "Please enable motion services in Settings.app"
+        message = "The user disabled motion services systemwide."
       case .networkConnectionUnavailable:
         type = "Network Connection Unavailable"
         message = "There was no network connection for 12 hours. Stopped collecting tracking data."
@@ -151,6 +150,16 @@ class ViewController: UIViewController {
       case .paymentDefault:
         type = "Payment Default"
         message = "There was an error processing your payment."
+      
+      case .motionActivityPermissionsNotDetermined:
+        type = "Motion Activity Permissions Not Determined"
+        message = "The user has not chosen whether the app can use motion activity services."
+      case .motionActivityPermissionsCantBeAskedInBackground:
+        type = "Motion Activity Permissions Can't Be Asked In Background"
+        message = "The user has not chosen whether the app can use motion activity services."
+      case .motionActivityPermissionsRestricted:
+        type = "Motion Activity Permissions Restricted"
+        message = "Motion access is denied due to system-wide restrictions."
       }
     case let .unrestorableError(unrestorableError):
       switch unrestorableError {

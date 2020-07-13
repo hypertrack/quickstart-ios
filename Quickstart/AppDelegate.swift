@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     /// Register for remote notifications
     HyperTrack.registerForRemoteNotifications()
+    
     return true
   }
   
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
   }
   
+
   func application(
     _ application: UIApplication,
     didFailToRegisterForRemoteNotificationsWithError error: Error
@@ -50,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
   }
   
+
   func application(
     _ application: UIApplication,
     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
