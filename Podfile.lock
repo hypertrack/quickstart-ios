@@ -2,14 +2,14 @@ PODS:
   - GRDB.swift (4.4.0):
     - GRDB.swift/standard (= 4.4.0)
   - GRDB.swift/standard (4.4.0)
-  - HyperTrack (4.2.3):
+  - HyperTrack (4.4.0):
     - GRDB.swift (= 4.4.0)
-    - HyperTrack/Swift (= 4.2.3)
-  - HyperTrack/Swift (4.2.3):
+    - HyperTrack/Swift (= 4.4.0)
+  - HyperTrack/Swift (4.4.0):
     - GRDB.swift (= 4.4.0)
 
 DEPENDENCIES:
-  - HyperTrack (= 4.2.3)
+  - HyperTrack (= 4.4.0)
 
 SPEC REPOS:
   https://cdn.cocoapods.org/:
@@ -18,8 +18,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   GRDB.swift: 4f9b6e7efc9470426f6a6de10ec1fee798ff7e43
-  HyperTrack: 58e4ec6cf22c26a97eaf9d0d917dcdecbb8cdfd3
+  HyperTrack: 9af47ec949ac9a327bd012d775fba51f056fe795
 
-PODFILE CHECKSUM: 7aa885a4cfa5c2c2f180d0c2da66400a99569f63
+PODFILE CHECKSUM: e62b16007f95dfe2c5a40d08d9aba27766c4f818
 
 COCOAPODS: 1.9.3
