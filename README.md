@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios.svg)
 ![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.4.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.5.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
 Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons.
@@ -17,7 +17,13 @@ get your publishable key from the [Setup page](https://dashboard.hypertrack.com/
 
 ### Install the SDK dependency
 
-Quickstart app uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version of CocoaPods is advised.
+#### SwiftUI version
+
+SwiftUI version uses Swift Package Manager to install the latest version of the SDK. Open `Quickstart.xcodeproj` and HyperTrack dependency will be downloaded automatically.
+
+#### UIKit version
+
+UIKit version uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version of CocoaPods is advised.
 
 If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
 
@@ -25,7 +31,14 @@ Run `pod install` inside the cloned directory. After CocoaPods creates the `Quic
 
 ### Set your Publishable Key
 
-Open the Quickstart project inside the workspace and set your Publishable Key (from [Setup page](https://dashboard.hypertrack.com/setup))
+#### SwiftUI version
+
+Open the Quickstart project and set your Publishable Key (from [Setup page](https://dashboard.hypertrack.com/setup))
+inside the placeholder in the `Quickstart.swift` file.
+
+#### UIKit version
+
+Open the Quickstart workspace and set your Publishable Key (from [Setup page](https://dashboard.hypertrack.com/setup))
 inside the placeholder in the `AppDelegate.swift` file.
 
 ### Setup silent push notifications
@@ -43,8 +56,6 @@ and fill in your Team ID (Can be seen in Account > Membership).
 Run the app on your phone and you should see the following interface:
 
 ![Quickstart app](Images/On_Device.png)
-
-Enable location and activity permissions (choose "Always Allow" for location).
 
 > HyperTrack creates a unique internal device identifier that's used as mandatory key for all HyperTrack API calls.
 > Please be sure to get the `device_id` from the app or the logs. The app calls

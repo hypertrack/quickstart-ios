@@ -1,0 +1,18 @@
+PODS:
+  - HyperTrack (4.5.0):
+    - HyperTrack/Swift (= 4.5.0)
+  - HyperTrack/Swift (4.5.0)
+
+DEPENDENCIES:
+  - HyperTrack (= 4.5.0)
+
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - HyperTrack
+
+SPEC CHECKSUMS:
+  HyperTrack: 487d1d02bdc6b297ca869542f7d07653f93138b0
+
+PODFILE CHECKSUM: 595432e4fdac20b25c9cc6009752cc7a9bc52fe5
+
+COCOAPODS: 1.10.0.rc.1
