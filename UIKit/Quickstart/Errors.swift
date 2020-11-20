@@ -13,6 +13,9 @@ func convertFatalErrorToUIMessage(_ error: HyperTrack.FatalError) -> (type: Stri
     case .runningOnSimulatorUnsupported:
       type = "Running On Simulator Unsupported"
       message = "You are running the SDK on the iOS simulator, which currently does not support CoreMotion services. You can test the SDK on real iOS devices only."
+    @unknown default:
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   case let .productionError(productionError):
     switch productionError {
@@ -25,6 +28,9 @@ func convertFatalErrorToUIMessage(_ error: HyperTrack.FatalError) -> (type: Stri
     case .motionActivityPermissionsDenied:
       // Was deprecated in 4.4.0 and will never be emitted.
       fatalError()
+    @unknown default:
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   }
   return (type, message)
@@ -77,6 +83,9 @@ func convertTrackingErrorToUIMessage(_ trackingError: HyperTrack.TrackingError) 
     case .motionActivityPermissionsRestricted:
       type = "Motion Activity Permissions Restricted"
       message = "Motion access is denied due to system-wide restrictions."
+    @unknown default:
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   case let .unrestorableError(unrestorableError):
     switch unrestorableError {
@@ -86,6 +95,9 @@ func convertTrackingErrorToUIMessage(_ trackingError: HyperTrack.TrackingError) 
     case .motionActivityPermissionsDenied:
       type = "Motion Activity Permissions Denied"
       message = "Please grant motion permissions in Settings.app"
+    @unknown default:
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   }
   return (type, message)

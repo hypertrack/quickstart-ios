@@ -15,8 +15,8 @@ func convertFatalErrorToUIMessage(_ fatalError: HyperTrack.FatalError) -> (type:
       type = "Running On Simulator Unsupported"
       message = "You are running the SDK on the iOS simulator, which currently does not support CoreMotion services. You can test the SDK on real iOS devices only."
     @unknown default:
-      type = "Unknown development error"
-      message = ""
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   case let .productionError(productionError):
     switch productionError {
@@ -30,8 +30,9 @@ func convertFatalErrorToUIMessage(_ fatalError: HyperTrack.FatalError) -> (type:
       type = "Motion Activity Permissions Denied"
       message = "Motion activity permissions denied before SDK initialization. Granting them will restart the app, so in effect, they are denied during this app's session."
     @unknown default:
-      type = "Unknown production error"
-      message = ""
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
+
     }
   }
   return (type, message)
@@ -85,8 +86,8 @@ func convertTrackingErrorToUIMessage(_ trackingError: HyperTrack.TrackingError) 
       type = "Motion Activity Permissions Restricted"
       message = "Motion access is denied due to system-wide restrictions."
     @unknown default:
-      type = "Unknown Restorable Error"
-      message = ""
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   case let .unrestorableError(unrestorableError):
     switch unrestorableError {
@@ -97,8 +98,8 @@ func convertTrackingErrorToUIMessage(_ trackingError: HyperTrack.TrackingError) 
       type = "Motion Activity Permissions Denied"
       message = "Please grant motion permissions in Settings.app"
     @unknown default:
-      type = "Unknown Unrestorable Error"
-      message = ""
+      type = "Incompatible"
+      message = "This Quickstart is incompatible with current SDK version and doesn't handle this error yet."
     }
   }
   return (type, message)

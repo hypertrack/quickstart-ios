@@ -1,18 +1,18 @@
 PODS:
-  - HyperTrack (4.5.1):
-    - HyperTrack/Swift (= 4.5.1)
-  - HyperTrack/Swift (4.5.1)
+  - HyperTrack (4.6.0):
+    - HyperTrack/Swift (= 4.6.0)
+  - HyperTrack/Swift (4.6.0)
 
 DEPENDENCIES:
-  - HyperTrack (= 4.5.1)
+  - HyperTrack (= 4.6.0)
 
 SPEC REPOS:
   trunk:
     - HyperTrack
 
 SPEC CHECKSUMS:
-  HyperTrack: 595288ee7b489290310a6b91a0db816ddeb2b81e
+  HyperTrack: 7348ec6feb266c7909496ea59602ac4ad78b972b
 
-PODFILE CHECKSUM: 2482dba7fda5e3edd173182a6a32c9a1ccd98e08
+PODFILE CHECKSUM: 47d090a67280497443f76c4ee7f147765012de0c
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

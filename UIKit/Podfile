@@ -3,5 +3,5 @@ inhibit_all_warnings!
 
 target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrack', '4.5.1'
+  pod 'HyperTrack', '4.6.0'
 end
