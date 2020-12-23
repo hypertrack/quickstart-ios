@@ -16,6 +16,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
     /// Register for notifications to update the tracking indicator state
     NotificationCenter.default.addObserver(
       self,
