@@ -358,8 +358,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hypertrack/sdk-ios";
 			requirement = {
-				kind = exactVersion;
-				version = 4.7.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
