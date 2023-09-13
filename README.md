@@ -15,37 +15,15 @@ get your publishable key from the [Setup page](https://dashboard.hypertrack.com/
 
 ## Clone Quickstart app
 
-### Install the SDK dependency
-
-#### SwiftUI version
-
-SwiftUI version uses Swift Package Manager to install the latest version of the SDK. Open `Quickstart.xcodeproj` and HyperTrack dependency will be downloaded automatically.
-
-#### UIKit version
-
-UIKit version uses [CocoaPods](https://cocoapods.org) dependency manager to install the latest version of the SDK. Using the latest version of CocoaPods is advised.
-
-If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
-
-Run `pod install` inside the cloned directory. After CocoaPods creates the `Quickstart.xcworkspace` workspace file, open it with Xcode.
+Open `Quickstart.xcodeproj`.
 
 ### Set your Publishable Key
 
-#### SwiftUI version
-
-Open the Quickstart project and set your Publishable Key (from [Setup page](https://dashboard.hypertrack.com/setup))
-inside the placeholder in the `Quickstart.swift` file.
-
-#### UIKit version
-
-Open the Quickstart workspace and set your Publishable Key (from [Setup page](https://dashboard.hypertrack.com/setup))
-inside the placeholder in the `AppDelegate.swift` file.
+Open the Quickstart project and set your Publishable Key by adding a `HyperTrackPublishableKey` key in the Info.plist file with a String value obtained from the [Setup page](https://dashboard.hypertrack.com/setup).
 
 ### Setup silent push notifications
 
 Set up silent push notifications to manage on-device tracking using HyperTrack cloud APIs from your server.
-
-> If you prefer to use your own messaging service to manage server-to-device communication, use the [sync](https://www.hypertrack.com/docs/references/#references-sdks-ios) method.
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup).
 Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created from Apple Developer console > Certificates, Identifiers & Profiles > Keys)

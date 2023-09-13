@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3101BADD251A8C970058B115 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101BADC251A8C970058B115 /* Errors.swift */; };
 		31460C24251A3B19007323A9 /* Quickstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31460C23251A3B19007323A9 /* Quickstart.swift */; };
 		31460C26251A3B19007323A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31460C25251A3B19007323A9 /* ContentView.swift */; };
 		31460C28251A3B1B007323A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31460C27251A3B1B007323A9 /* Assets.xcassets */; };
 		31460C2B251A3B1B007323A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31460C2A251A3B1B007323A9 /* Preview Assets.xcassets */; };
-		31460C3B251A3C88007323A9 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31460C3A251A3C88007323A9 /* PushNotifications.swift */; };
 		31460C3F251A3D3C007323A9 /* HyperTrack in Frameworks */ = {isa = PBXBuildFile; productRef = 31460C3E251A3D3C007323A9 /* HyperTrack */; };
-		31460C42251A40FA007323A9 /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31460C41251A40FA007323A9 /* FailureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3101BADC251A8C970058B115 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		31460C20251A3B19007323A9 /* Quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31460C23251A3B19007323A9 /* Quickstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quickstart.swift; sourceTree = "<group>"; };
 		31460C25251A3B19007323A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,8 +22,6 @@
 		31460C2A251A3B1B007323A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		31460C2C251A3B1B007323A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31460C37251A3BF4007323A9 /* Quickstart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quickstart.entitlements; sourceTree = "<group>"; };
-		31460C3A251A3C88007323A9 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
-		31460C41251A40FA007323A9 /* FailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +57,7 @@
 			children = (
 				31460C37251A3BF4007323A9 /* Quickstart.entitlements */,
 				31460C23251A3B19007323A9 /* Quickstart.swift */,
-				31460C3A251A3C88007323A9 /* PushNotifications.swift */,
 				31460C25251A3B19007323A9 /* ContentView.swift */,
-				31460C41251A40FA007323A9 /* FailureView.swift */,
-				3101BADC251A8C970058B115 /* Errors.swift */,
 				31460C27251A3B1B007323A9 /* Assets.xcassets */,
 				31460C2C251A3B1B007323A9 /* Info.plist */,
 				31460C29251A3B1B007323A9 /* Preview Content */,
@@ -158,10 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31460C26251A3B19007323A9 /* ContentView.swift in Sources */,
-				3101BADD251A8C970058B115 /* Errors.swift in Sources */,
 				31460C24251A3B19007323A9 /* Quickstart.swift in Sources */,
-				31460C3B251A3C88007323A9 /* PushNotifications.swift in Sources */,
-				31460C42251A40FA007323A9 /* FailureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +346,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hypertrack/sdk-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.8.0;
+				kind = exactVersion;
+				version = 5.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
