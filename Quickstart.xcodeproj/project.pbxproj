@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -347,7 +347,7 @@
 			repositoryURL = "https://github.com/hypertrack/sdk-ios";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.1;
+				version = 5.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

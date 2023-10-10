@@ -43,7 +43,8 @@ struct ContentView: View {
   @State private var isTracking = HyperTrack.isTracking
   @State private var errors: [ErrorViewModel] = []
   @State private var subscribeToErrorsCancellable: HyperTrack.Cancellable!
-  
+  @State private var subscribeToIsTrackingCancellable: HyperTrack.Cancellable!
+
   var body: some View {
     GeometryReader { geometry in
       VStack(spacing: 0) {
@@ -100,6 +101,9 @@ struct ContentView: View {
         errors = Array($0)
           .map { viewModel($0, locationManager: locationManager) }
           .sorted()
+      }
+      subscribeToIsTrackingCancellable = HyperTrack.subscribeToIsTracking {
+        isTracking = $0
       }
     }
     .onDisappear {
