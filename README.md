@@ -1,7 +1,7 @@
 # HyperTrack Quickstart for iOS SDK
 
 [![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-ios?color=orange)](./LICENSE)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-5.0.1-brightgreen.svg)](https://github.com/hypertrack/sdk-ios)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-5.0.3-brightgreen.svg)](https://github.com/hypertrack/sdk-ios)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
 Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons.
