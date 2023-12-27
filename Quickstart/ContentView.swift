@@ -80,7 +80,7 @@ struct ContentView: View {
               .padding(.vertical, 20)
               .background(isTracking ? Color.green : Color.black)
               .padding(.horizontal, 20)
-              .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
+              .animation(/*@START_MENU_TOKEN@*/ .easeIn/*@END_MENU_TOKEN@*/)
           }
           Spacer()
         }
@@ -105,6 +105,25 @@ struct ContentView: View {
       subscribeToIsTrackingCancellable = HyperTrack.subscribeToIsTracking {
         isTracking = $0
       }
+
+      HyperTrack.name = "Quickstart iOS"
+      let metadata = toJSON([
+        /// `driver_handle` is used to link the device and the driver.
+        /// You can use any unique user identifier here.
+        /// The recommended way is to set it on app login in set it to null on logout
+        /// (to remove the link between the device and the driver)
+        "driver_handle": "test_driver_quickstart_ios",
+        /// You can also add any custom data to the metadata.
+        "source": "iOS",
+        "employee_id": Int.random(in: 0 ..< 10000),
+      ])
+
+      guard let metadata = metadata else {
+        /// Make sure to check if toJSON result is non-nil and properly handle this error
+        /// (it is nil when the provided data is not JSON-compatible)
+        preconditionFailure("Metadata is nil")
+      }
+      HyperTrack.metadata = metadata
     }
     .onDisappear {
       subscribeToErrorsCancellable.cancel()
