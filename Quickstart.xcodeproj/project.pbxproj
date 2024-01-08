@@ -347,7 +347,7 @@
 			repositoryURL = "https://github.com/hypertrack/sdk-ios";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.7;
+				version = 5.0.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
