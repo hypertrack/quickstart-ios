@@ -38,62 +38,89 @@ struct ErrorRowView: View {
   }
 }
 
+struct OrderViewModel {
+  let orderHandle: String
+  let isInsideGeofence: String
+}
+
+extension OrderViewModel: Equatable {
+  static func == (lhs: Self, rhs: Self) -> Bool {
+    lhs.orderHandle == rhs.orderHandle
+  }
+}
+
+extension OrderViewModel: Comparable {
+  static func < (lhs: Self, rhs: Self) -> Bool {
+    lhs.orderHandle < rhs.orderHandle
+  }
+}
+
+struct OrderRowView: View {
+  var order: OrderViewModel
+  var body: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      Text("Order Handle: \(order.orderHandle)")
+        .font(.headline)
+      Text("Is Inside Geofence: \(order.isInsideGeofence)")
+        .font(.subheadline)
+    }
+  }
+}
+
 struct ContentView: View {
   @State private var deviceID = HyperTrack.deviceID
   @State private var isTracking = HyperTrack.isTracking
   @State private var errors: [ErrorViewModel] = []
+  @State private var orders: [OrderViewModel] = []
   @State private var subscribeToErrorsCancellable: HyperTrack.Cancellable!
   @State private var subscribeToIsTrackingCancellable: HyperTrack.Cancellable!
+  @State private var subscribeToOrdersCancellable: HyperTrack.Cancellable!
 
   var body: some View {
     GeometryReader { geometry in
       VStack(spacing: 0) {
-        VStack {
-          Text("Device ID (long press to copy)")
-            .bold()
-            .padding(.top)
-          Text(deviceID)
-            .padding(.horizontal)
-            .contextMenu {
-              Button {
-                UIPasteboard.general.string = deviceID
-              } label: {
-                Text("Copy to clipboard")
-                Image(systemName: "doc.on.doc")
-              }
+        Text("Device ID (long press to copy)")
+          .bold()
+          .padding(.top)
+        Text(deviceID)
+          .padding(.horizontal)
+          .contextMenu {
+            Button {
+              UIPasteboard.general.string = deviceID
+            } label: {
+              Text("Copy to clipboard")
+              Image(systemName: "doc.on.doc")
             }
-          Spacer()
-        }
-        .frame(height: geometry.size.height / 3)
-        VStack {
-          Spacer()
-          Button {
-            var updatedIsTracking = HyperTrack.isTracking
-            updatedIsTracking.toggle()
-            HyperTrack.isTracking = updatedIsTracking
-            isTracking = updatedIsTracking
-          } label: {
-            Text(isTracking ? "Tracking" : "Not Tracking")
-              .foregroundColor(Color.white)
-              .bold()
-              .frame(maxWidth: .infinity)
-              .padding(.vertical, 20)
-              .background(isTracking ? Color.green : Color.black)
-              .padding(.horizontal, 20)
-              .animation(/*@START_MENU_TOKEN@*/ .easeIn/*@END_MENU_TOKEN@*/)
           }
-          Spacer()
+        Spacer()
+        Button {
+          var updatedIsTracking = HyperTrack.isTracking
+          updatedIsTracking.toggle()
+          HyperTrack.isTracking = updatedIsTracking
+          isTracking = updatedIsTracking
+        } label: {
+          Text(isTracking ? "Tracking" : "Not Tracking")
+            .foregroundColor(Color.white)
+            .bold()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+            .background(isTracking ? Color.green : Color.black)
+            .padding(.horizontal, 20)
+            .animation(/*@START_MENU_TOKEN@*/ .easeIn/*@END_MENU_TOKEN@*/)
         }
-        .frame(height: geometry.size.height / 3)
         Spacer()
         List(errors, id: \.title) { error in
           ErrorRowView(error: error)
         }
-        .frame(height: geometry.size.height / 3)
+        Spacer()
+        List(orders, id: \.orderHandle) { order in
+          OrderRowView(order: order)
+        }
       }
     }
     .onAppear {
       let locationManager = CLLocationManager()
+
       errors = HyperTrack.errors
         .map { viewModel($0, locationManager: locationManager) }
         .sorted()
@@ -102,18 +129,28 @@ struct ContentView: View {
           .map { viewModel($0, locationManager: locationManager) }
           .sorted()
       }
+
       subscribeToIsTrackingCancellable = HyperTrack.subscribeToIsTracking {
         isTracking = $0
       }
 
+      orders = HyperTrack.orders
+        .map { viewModel($0) }
+        .sorted()
+      subscribeToOrdersCancellable = HyperTrack.subscribeToOrders {
+        orders = Array($0)
+          .map { viewModel($0) }
+          .sorted()
+      }
+
+      /// `worker_handle` is used to link the device and the worker.
+      /// You can use any unique user identifier here.
+      /// The recommended way is to set it on app login in set it to null on logout
+      /// (to remove the link between the device and the worker)
+      HyperTrack.workerHandle = "test_worker_quickstart_ios"
       HyperTrack.name = "Quickstart iOS"
       let metadata = toJSON([
-        /// `driver_handle` is used to link the device and the driver.
-        /// You can use any unique user identifier here.
-        /// The recommended way is to set it on app login in set it to null on logout
-        /// (to remove the link between the device and the driver)
-        "driver_handle": "test_driver_quickstart_ios",
-        /// You can also add any custom data to the metadata.
+        /// You can add any custom data to the metadata.
         "source": "iOS",
         "employee_id": Int.random(in: 0 ..< 10000),
       ])
@@ -127,6 +164,8 @@ struct ContentView: View {
     }
     .onDisappear {
       subscribeToErrorsCancellable.cancel()
+      subscribeToIsTrackingCancellable.cancel()
+      subscribeToOrdersCancellable.cancel()
     }
   }
 }
@@ -214,5 +253,58 @@ func viewModel(_ error: HyperTrack.Error, locationManager: CLLocationManager) ->
     }
   @unknown default:
     fatalError()
+  }
+}
+
+// MARK: - Order handling
+
+func viewModel(_ order: HyperTrack.Order) -> OrderViewModel {
+  switch order.isInsideGeofence {
+    case .success(let value):
+      return .init(orderHandle: order.orderHandle, isInsideGeofence: value ? "true" : "false")
+    case .failure(let locationError):
+      switch locationError {
+        case .errors(let errors):
+            let errorsText = errors.map {
+                switch $0 {
+                case .blockedFromRunning:
+                    "Blocked from running"
+                case .invalidPublishableKey:
+                    "Invalid publishable key"
+                case .location(let location):
+                    switch location {
+                    case .mocked:
+                        "Location mocked"
+                    case .servicesDisabled:
+                        "Location services disabled"
+                    case .signalLost:
+                        "Location signal lost"
+                    }
+                case .permissions(let permissions):
+                    switch permissions {
+                    case .location(let location):
+                        switch location {
+                        case .denied:
+                            "Location permissions denied"
+                        case .insufficientForBackground:
+                            "Location permissions insufficient for background"
+                        case .notDetermined:
+                            "Location permissions not determined"
+                        case .provisional:
+                            "Location permissions provisional"
+                        case .reducedAccuracy:
+                            "Location permissions reduced accuracy"
+                        case .restricted:
+                            "Location permissions restricted"
+                        }
+                    }
+                }
+            }.joined(separator: "\n")
+            return .init(orderHandle: order.orderHandle, isInsideGeofence: errorsText)
+        case .notRunning:
+            return .init(orderHandle: order.orderHandle, isInsideGeofence: "Not running")
+        case .starting:
+            return .init(orderHandle: order.orderHandle, isInsideGeofence: "Starting")
+      }
   }
 }
