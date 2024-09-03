@@ -45,7 +45,7 @@ struct OrderViewModel {
 
 extension OrderViewModel: Equatable {
   static func == (lhs: Self, rhs: Self) -> Bool {
-    lhs.orderHandle == rhs.orderHandle
+    lhs.orderHandle == rhs.orderHandle && lhs.isInsideGeofence == rhs.isInsideGeofence
   }
 }
 
@@ -140,7 +140,6 @@ struct ContentView: View {
       subscribeToOrdersCancellable = HyperTrack.subscribeToOrders {
         orders = Array($0)
           .map { viewModel($0) }
-          .sorted()
       }
 
       /// `worker_handle` is used to link the device and the worker.
