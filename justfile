@@ -15,4 +15,4 @@ update-sdk ios_version:
     just open-github-prs
 
 _update-sdk-ios-version-file ios_version:
-    ./scripts/update_file.sh Quickstart.xcodeproj/project.pbxproj "version = \'.*\;" "version = '{{ios_version}}';"
+    ./scripts/update_file.sh Quickstart.xcodeproj/project.pbxproj "version = .*;" "version = {{ios_version}};"
